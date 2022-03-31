@@ -25,8 +25,7 @@ class s_0101 {
 		String str = kb.next();
 		char c = kb.next().charAt(0);
 		System.out.println(T.solution(str, c));
-		
-		
+	
 	}
 
 }

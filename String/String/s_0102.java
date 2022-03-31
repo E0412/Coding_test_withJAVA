@@ -8,5 +8,4 @@ public class s_0102 {
 		int b = 2;
 		System.out.println(a+b);
 	}
-
 }
