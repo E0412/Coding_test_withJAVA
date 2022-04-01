@@ -7,17 +7,18 @@ import java.util.Scanner;
 class s_0103 {
 	public String solution(String str) {
 		String answer = "";
-		int max = Integer.MIN_VALUE; //가장 작은값으로 초기화
-		String[] s = str.split(" "); 
-		for(String x : s) { //단어 분리
-			int len = x.length();
-			if(len>max) {
-				max = len; //길이가 긴 것으로 교체
-				answer = x; //단어 교체 
-			}
-			
+		//index of와 subString 사용 
+		int max = Integer.MIN_VALUE , pos; //가장 작은값으로 초기화
+		while((pos = str.indexOf(' ')) != -1) { //띄어쓰기 발견 못하면 -1 리턴
+			String tmp = str.substring(0, pos); //0부터 pos까지 잘라냄
+			int len = tmp.length();
+			if(len> max) { //같으면 안됨 
+				max=len;
+				answer=tmp;
+			} 
+			str = str.substring(pos+1);
 		}
-		
+		if(str.length()>max) answer=str; //마지막 단어 출력 
 		return answer;
 	}
 	
