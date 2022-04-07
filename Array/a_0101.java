@@ -1,6 +1,6 @@
 import java.util.*;
 
-//Å« ¼ö Ãâ·ÂÇÏ±â 
+//í° ìˆ˜ ì¶œë ¥í•˜ê¸° 
 public class a_0101 {
 		public ArrayList<Integer> solution(int n, int[] arr) {
 			ArrayList<Integer> answer = new ArrayList<>();
