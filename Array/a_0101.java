@@ -23,5 +23,4 @@ public class a_0101 {
 			System.out.println(x+" ");
 		}
 	}
-
 }
