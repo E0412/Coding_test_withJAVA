@@ -6,6 +6,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="DFS_BFS"/>
+	<classpathentry kind="src" path="Sort"/>
+	<classpathentry kind="src" path="Stack&amp;Queue"/>
+	<classpathentry kind="src" path="Hash&amp;Set"/>
 	<classpathentry kind="src" path="Backjun"/>
 	<classpathentry kind="src" path="Array"/>
 	<classpathentry kind="src" path="String"/>
