@@ -13,6 +13,5 @@
 	<classpathentry kind="src" path="Backjun"/>
 	<classpathentry kind="src" path="Array"/>
 	<classpathentry kind="src" path="String"/>
-	<classpathentry kind="src" path="graph"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
