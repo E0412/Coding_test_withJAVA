@@ -5,7 +5,7 @@ import java.util.Scanner;
 //조합수(메모이제이션)
 public class D_0107 {
 	public int DFS(int n, int r) {
-		if(n==r && r == 0) return 1; //1을 return하는 경우 
+		if(n==r || r == 0) return 1; //1을 return하는 경우 
 		else return DFS(n-1, r-1) + DFS(n-1, r); //조합의 공식
 	}
 	
