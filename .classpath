@@ -6,6 +6,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="Greedy"/>
+	<classpathentry kind="src" path="DP"/>
 	<classpathentry kind="src" path="DFS_BFS"/>
 	<classpathentry kind="src" path="Sort"/>
 	<classpathentry kind="src" path="Stack&amp;Queue"/>
