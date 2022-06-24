@@ -8,12 +8,12 @@ public class D_0103 {
 		dy = new int[arr.length];
 		dy[0]=1;
 		for(int i = 1; i<arr.length; i++) {
-			int max = 0;
+			int max = 0; //0으로 초기화 
 			for(int j = i-1; j>=0; j--) {
 				if(arr[j]<arr[i]&& dy[j]>max) max = dy[j];
 			}
 			dy[i]= max+1;
-			answer = Math.max(answer, dy[i]);
+			answer = Math.max(answer, dy[i]);//최대값 찾기 
 		}
 		return answer;
 	}
