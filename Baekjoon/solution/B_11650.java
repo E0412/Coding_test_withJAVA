@@ -3,7 +3,7 @@ package solution;
 import java.io.*;
 import java.util.*;
 
-//좌표 정렬하기(Comparator)
+//좌표 정렬하기(Comparator, 람다식 개선)
 public class B_11650 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -21,15 +21,12 @@ public class B_11650 {
 			arr[i][1] = Integer.parseInt(st.nextToken());
 		}
 		
-		Arrays.sort(arr, new Comparator<int[]>() {
-			@Override
-			public int compare(int[] o1, int[] o2) {
+		Arrays.sort(arr, (o1, o2) -> {
 				if(o1[0] == o2[0]) { //첫번째 원소가 같다면 두 번째 원소끼리 비교
 					return o1[1] - o2[1];
 				} else {
 					return o1[0] - o2[0];
 				}
-			}
 		});
 		
 		for (int i = 0; i < N; i++) {
