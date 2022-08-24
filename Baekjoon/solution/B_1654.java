@@ -26,8 +26,10 @@ public class B_1654 {
 				max = arr[i];
 			}
 		}
-		long min = 1; //최솟값
+		max++; //max값에 1을 더해야한다 
+		long min = 0; //최솟값
 		long mid = 0; //중간값
+		
 		//upper bound 방식으로 탐색 
 		while(min < max) {
 			mid = (max + min) / 2;
