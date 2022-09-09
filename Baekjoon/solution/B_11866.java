@@ -11,7 +11,6 @@ import java.util.*;
 public class B_11866 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
 		int N = Integer.parseInt(st.nextToken()); //전체 인원 수 
@@ -19,16 +18,25 @@ public class B_11866 {
 		int result = 0;
 		
 		Queue<Integer> queue = new LinkedList<Integer>();
-		//1번부터 시작 
+		//1번부터 시작, queue 할당  
 		for (int i = 1; i <= N; i++) {
 			queue.offer(i); //순서대로 추가한다
 		}
-		while(!queue.isEmpty()) { //queue가 비어있지 않을 때 
-			for (int i = 1; i < K; i++) {
+
+		//출력 
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		bw.write("<");
+		//queue에 할당된 수가 1개보다 많을 때 반복 
+		while(queue.size() > 1) { 
+			for (int i = 0; i < K - 1; i++) {
+				//K개 이전까지의 수를 꺼내고 다시 추가한다 
 				queue.offer(queue.poll()); 
 			}
+			bw.write(queue.poll() + ", "); //마지막 원소 이전까지 내보낸다 
 		}
-		System.out.println("<" + queue.poll() + ">");
+		bw.write(queue.poll() + ">"); //마지막 원소는 >와 함께 출력한다 
+		bw.flush();
+		bw.close();
 	}
 }
 
