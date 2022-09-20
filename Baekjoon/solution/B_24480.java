@@ -16,11 +16,13 @@ public class B_24480 {
 	
 	//깊이 우선 탐색
 	public static void DFS(int x) {
-		visited[x] = cnt; //방문한 정점에 순서 저장 
+		//방문한 정점에 순서 저장 
+		visited[x] = cnt;
 		
+		//현재 위치한 정점이 갈 수 있는 정점 리스트를 순회(2차원 배열)
 		for (int i = 0; i < graph.get(x).size(); i++) {
-			int y = graph.get(x).get(i); 
-			
+			int y = graph.get(x).get(i);
+
 			//방문 여부 확인 
 			if(visited[y] == 0) {
 				cnt++;
@@ -55,8 +57,14 @@ public class B_24480 {
 			graph.get(to).add(from);
 		}
 		
+		//내림차순 정렬
+		for (int i = 1; i < graph.size(); i++) {
+			Collections.sort(graph.get(i), Collections.reverseOrder());
+		}
+		
 		DFS(start); 
 		
+		//방문 순서 출력 
 		for (int i = 1; i < visited.length; i++) {
 			bw.write(visited[i] + "\n");
 		}
