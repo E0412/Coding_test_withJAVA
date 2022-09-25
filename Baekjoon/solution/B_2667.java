@@ -11,31 +11,33 @@ import java.util.*;
  */
 public class B_2667 {
 	
-	public static int N; //입력
-	//2차원 배열 graph 
-	public static int graph[][] = new int[25][25];
-	public static int total; //총 단지 수 
-	public static int cnt; //단지내 집의 수 
+	public static int dx[] = {0, 0, 1, -1};
+	public static int dy[] = {1, -1, 0, 0};
 	
-	//DFS로 특정 노드를 방문한 후 연결된 모든 노드를 방문 
-	public static boolean DFS(int x, int y) {
-		//주어진 범위를 벗어나는 경우 종료한다
-		if(x < 0 || x >= N || y < 0 || y >= N) {
-			return false;
-		}
+	public static int N; //입력
+	public static int graph[][]; //아파트 단지 배열
+	public static int visited[][]; //아파트 단지 방문여부
+	
+	public static int total = 1; //총 단지 수 
+	//각 단지의 수를 저장 
+	public static ArrayList<Integer> apart = new ArrayList<>(); 
+
+	//DFS 실행 
+	public static void DFS(int x, int y) {
+		visited[x][y] = 1; //방문 처리
 		
-		//상, 하, 좌, 우를 살펴본 후 값이 0이면서 방문하지 않은 지점 방문 
-		if(graph[x][y] == 0) {
-			graph[x][y] = 1; 
-			
-			//상, 하, 좌, 우의 위치들을 재귀적으로 호출
-			DFS(x - 1, y); //좌
-			DFS(x + 1, y); //우
-			DFS(x, y + 1); //상
-			DFS(x, y - 1); //하 
-			return true; //방문 처리 
-		}
-		return false;
+		 for(int i = 0; i < 4; i++){
+	            int nx = x + dx[i]; //다음 x좌표
+	            int ny = y + dy[i]; //다음 y좌표 
+
+	            //해당 조건에 방문하지 않은 경우 DFS 실행
+	            if(nx >= 0 && ny >= 0 && nx < N && ny < N){
+	                if(graph[nx][ny] == 1 && visited[nx][ny] == 0){
+	                    DFS(nx,ny);
+	                    total++;
+	                }
+	            }
+		 }
 	}
 	
 	public static void main(String[] args) throws IOException {
@@ -43,25 +45,35 @@ public class B_2667 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
 		N = Integer.parseInt(br.readLine());
+		graph = new int[N][N]; //전체 크기
+		visited = new int[N][N]; //방문 체크 
 		
-		//2차원 리스트의 맵 입력받기
+		//그래프 크기 할당 
 		for (int i = 0; i < N; i++) {
 			String s = br.readLine();
 			for (int j = 0; j < N; j++) {
-				graph[i][j] = s.charAt(j) - '0'; //각 문자열을 확인한다 
+				graph[i][j] = s.charAt(j) - '0'; //한 문자만 입력받을 수 있게 형변환 한다
 			}
 		}
-		
 		
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				//현재 위치에서 DFS 실행
-				if(DFS(i, j)) {
-					total++; //방문하지 않은 단지 수++
+				if(graph[i][j]== 1 && visited[i][j] == 0) {
+					total = 1;
+					
+					DFS(i, j);
+					apart.add(total);
 				}
 			}
 		}
-		bw.write(total + "\n"); //총 단지수 
+
+		bw.write(apart.size() + "\n"); //총 단지수 
+
+		Collections.sort(apart); //오름차순 정렬 
+		//각 단지의 수 
+		for (int i = 0; i < apart.size(); i++) {
+			bw.write(apart.get(i) + "\n");
+		}
 		bw.flush();
 		bw.close();
 	}
