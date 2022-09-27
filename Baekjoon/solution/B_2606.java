@@ -13,46 +13,44 @@ public class B_2606 {
 
 	public static int graph[][];
 	public static int N, M; //입력
-	public static int check[][]; //방문여부 0이면 방문x
-	public static int cnt = 1;
+	public static boolean check[]; //방문여부
+	public static int result = 0; //감염된 컴퓨터 수 
 	
-	public static void DFS(int x, int y) {
-		check[x][y] = 1; //방문으로 변경 
+	public static void DFS(int x ) {
+		check[x] = true; //방문으로 변경 
+		result++;
 		
-		cnt++;
-		
-		if(graph[x][y] == 0) {
-			
+		for (int i = 0; i < M; i++) {
+			//연결된 정점이면서 방문하지 않았을 때 
+			if(graph[x][i] == 1 && !check[i]) {
+				DFS(i);
+			}
 		}
 	}
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		
-		N = Integer.parseInt(br.readLine());
-		M = Integer.parseInt(br.readLine());
+		N = Integer.parseInt(br.readLine()); //정점
+		M = Integer.parseInt(br.readLine()); //간선
 		
 		graph = new int[N][N];
-		check = new int[N][N];
+		check = new boolean[N];
 		
-		//그래프 할당 
-		for (int i = 0; i < N; i++) {
+		//연결정보 저장, 1부터 시작
+		for (int i = 1; i < M; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 
 			int x = Integer.parseInt(st.nextToken());
 			int y = Integer.parseInt(st.nextToken());
 
-			graph[x][y] = graph[y][x] = 1;   
+			graph[x][y] = graph[y][x] = 1; //무방향 그래프 할당
 		}
+		DFS(1); //DFS 수행 
 		
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				DFS(i, j);
-			}
-		}
-		
-		bw.write(cnt + "");
+		bw.write(result + "");
 		bw.flush();
 		bw.close();
 	}
 }
+
