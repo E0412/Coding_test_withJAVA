@@ -5,7 +5,7 @@ import java.util.StringTokenizer;
 
 //음료수 얼려 먹기(DFS)
 //얼음이 채워지는 틀은 0 칸막이는 1 
-public class D_1119 {
+public class D_0119 {
 	
 	public static int n, m;
 	public static int[][] graph = new int[1000][1000];
