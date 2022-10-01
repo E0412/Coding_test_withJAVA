@@ -3,7 +3,7 @@ package theory;
 import java.util.*;
 
 //BFS 구현 
-public class B_1115 {
+public class B_0115 {
 	
 	//방문 여부 확인 
 	public static boolean check[] = new boolean[9];
