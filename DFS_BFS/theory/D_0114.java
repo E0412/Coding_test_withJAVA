@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 //DFS 구현
 //번호가 낮은 인접노드부터 방문한다 
-public class D_1114 {
+public class D_0114 {
 	//노드 방문 처리용 배열 
 	public static boolean[] visited = new boolean[9];
 	//ArrayList로 2차원 배열을 구현
