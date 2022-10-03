@@ -38,10 +38,8 @@ class Graph {
 			m.node.add(n);
 		}
 	}
-	//DFS 호출
-	void DFS() {
-		DFS(0); //0번부터 시작 
-	}
+	
+	//DFS호출 삭제 > main에서 호출 
 	//시작인덱스를 받는 DFS 메서드
 	void DFS(int index) {
 		Node root = nodes[index]; //해당 인덱스로 노드를 가져온다
@@ -63,6 +61,27 @@ class Graph {
 			visit(r);
 		}
 	}
+	
+	//시작 인덱스를 받는 BFS 메서드 추가
+	void BFS(int index) {
+		Node root = nodes[index];
+		Queue<Node> q = new LinkedList<Node>();
+		q.offer(root);
+		root.visited = true;
+		
+		while(!q.isEmpty()) {
+			Node r = q.poll();
+			for(Node N : r.node) {
+				//큐에 추가되지 않은 노드 추가
+				if(N.visited == false) { 
+					N.visited = true;	
+					q.offer(N);
+				}
+			}
+			visit(r);
+		}
+	}
+	
 	//방문시 출력하는 함수 생성
 	void visit(Node n) {
 		System.out.print(n.data + " ");
@@ -84,6 +103,7 @@ public class G_0116 {
 		graph.addEdge(5, 7);
 		graph.addEdge(6, 8);
 
-		graph.DFS(); //DFS 실행 
+		graph.DFS(0); //DFS 0부터 시작 - 0 1 3 5 7 6 8 4 2 
+		graph.BFS(0); //BFS 0부터 시작 - 0 1 2 3 4 5 6 7 8 
 	}
 }
