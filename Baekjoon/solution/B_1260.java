@@ -13,12 +13,23 @@ public class B_1260 {
 	public static boolean[] visited;
 	public static int V, E, start;
 	public static int cnt;
-
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+	
 	public static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 
 	//DFS 구현
-	public static void DFS(int x) {
+	public static void DFS(int x) throws IOException {
+		visited[x] = true;
+		bw.write(x + " ");
 		
+		for(int i = 0; i < graph.get(x).size(); i++) {
+			int y = graph.get(x).get(i);
+			
+			if(!visited[y]) {
+				visited[y] = true;
+				DFS(y);
+			}
+		}
 	}
 
 	//BFS 구현 
@@ -30,12 +41,13 @@ public class B_1260 {
 	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
 		V = Integer.parseInt(st.nextToken());
 		E = Integer.parseInt(st.nextToken());
 		start = Integer.parseInt(st.nextToken());
+		
+		visited = new boolean[V + 1];
 		
 		for (int i = 0; i <= V; i++) {
 			graph.add(new ArrayList<Integer>());
@@ -50,7 +62,9 @@ public class B_1260 {
 			graph.get(n).add(m);
 			graph.get(m).add(n);
 		}
-
+		
+		DFS(start);
+		
 	bw.flush();
 	bw.close();
 	}
