@@ -20,6 +20,8 @@ public class B_1260 {
 	//DFS 구현
 	public static void DFS(int x) throws IOException {
 		visited[x] = true;
+		//오름차순 정렬
+		Collections.sort(graph.get(x));
 		bw.write(x + " ");
 		
 		for(int i = 0; i < graph.get(x).size(); i++) {
@@ -33,10 +35,27 @@ public class B_1260 {
 	}
 
 	//BFS 구현 
-	public static void BFS(int x) {
-		
+	public static void BFS(int x) throws IOException {
+		Queue<Integer> q = new LinkedList<Integer>();
+		visited[x] = true;
+ 		q.offer(x);
+ 		
+ 		while(!q.isEmpty()) {
+ 			int y = q.poll();
+ 			
+ 			//오름차순 정렬
+			Collections.sort(graph.get(y));
+
+ 			bw.write(y + " ");
+ 			
+ 			for(int ny : graph.get(y)) {
+ 				if(!visited[ny]) {
+ 					visited[ny] = true;
+ 					q.offer(ny);
+ 				}
+ 			}
+ 		}
 	}
-	
 	
 	
 	public static void main(String[] args) throws IOException {
@@ -64,6 +83,10 @@ public class B_1260 {
 		}
 		
 		DFS(start);
+		bw.write("\n");
+		visited = new boolean[V + 1];
+		
+		BFS(start);
 		
 	bw.flush();
 	bw.close();
