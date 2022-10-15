@@ -33,8 +33,13 @@ public class B_2178 {
 			for (int i = 0; i < 4; i++) {
 				int nx = pos[0] + dx[i];
 				int ny = pos[1] + dy[i];
+				
 				//좌표 유효성 검사
-				if(x >= 0 && x < N && y >= 0 && y < M) {
+				/*
+				 * nx와 ny를 검사해야 하는데, x와 y를 검사하여
+				 * ArrayIndexOutOfBoundsException이 발생하였다.  
+				 */
+				if(nx >= 0 && nx < N && ny >= 0 && ny < M) {
 					//갈 수 있는 칸과 방문 여부 확인
 					if(graph[nx][ny] != 0 && !visited[nx][ny]) {
 						visited[nx][ny] = true;
@@ -61,13 +66,15 @@ public class B_2178 {
 		
 		
 		for (int i = 0; i < N; i++) {
-			String input = br.readLine();
+			st = new StringTokenizer(br.readLine());
+			String input = st.nextToken();
 			for (int j = 0; j < M; j++) {
-				graph[i][j] = input.charAt(j) - '0';
+				graph[i][j] = Integer.parseInt(input.substring(j, j + 1));
 			}
 		}
-		
-		bw.write(BFS(0, 0) + "");
+
+		//최단 거리 반환 
+		bw.write(BFS(0, 0)  + "");
 		bw.flush();
 		bw.close();
 	}
