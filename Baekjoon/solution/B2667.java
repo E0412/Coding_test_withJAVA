@@ -9,6 +9,16 @@ import java.util.*;
  * 첫 번째 줄에는 총 단지수를 출력
  * 각 단지내 집의 수를 오름차순으로 정렬하여 한 줄에 하나씩 출력
  */
+class Point {
+	int x; 
+	int y;
+	
+	public Point(int x, int y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+}
 public class B2667 {
 	
 	public static int dx[] = {0, 0, 1, -1};
@@ -18,19 +28,33 @@ public class B2667 {
 	public static int graph[][]; //아파트 단지 배열
 	public static boolean visited[][]; //아파트 단지 방문여부
 	
-	public static int total = 1; //총 단지 수 
+	public static int total = 0; //총 단지 수 
 	//각 단지의 수를 저장 
 	public static ArrayList<Integer> apart = new ArrayList<>(); 
 	
 	
 	//BFS 구현
 	public static void BFS(int x, int y) {
-		Queue<int[]> q = new LinkedList<>();
-		q.offer(new int[]{x,y});
+		Queue<Point> q = new LinkedList<>();
+		q.offer(new Point(x, y));
 		visited[x][y] = true; //방문 처리
 		
+		
 		while(!q.isEmpty()) {
+			Point point = q.poll();
+			total++;
 			
+			for (int i = 0; i < 4; i++) {
+				int nx = point.x + dx[i];
+				int ny = point.y + dy[i];
+				
+				if(nx < N && ny < N && nx >= 0 && ny >= 0) {
+					if(!visited[nx][ny] && graph[nx][ny] == 1) {
+						visited[nx][ny] = true;
+						q.offer(new Point(nx, ny));
+					}
+				}
+			}
 		}
 	}
 	
@@ -46,10 +70,10 @@ public class B2667 {
 		for (int i = 0; i < N; i++) {
 			String s = br.readLine();
 			for (int j = 0; j < N; j++) {
+				//띄어쓰기 없이 입력이 들어오기 때문에 charAt 사용 
 				graph[i][j] = s.charAt(j) - '0'; //한 문자만 입력받을 수 있게 형변환 한다
 			}
 		}
-		
 		
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
