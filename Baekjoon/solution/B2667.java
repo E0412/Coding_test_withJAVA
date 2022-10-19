@@ -12,42 +12,43 @@ import java.util.*;
 class Point {
 	int x; 
 	int y;
-	
+
 	public Point(int x, int y) {
 		super();
 		this.x = x;
 		this.y = y;
 	}
 }
+
 public class B2667 {
-	
-	public static int dx[] = {0, 0, 1, -1};
-	public static int dy[] = {1, -1, 0, 0};
-	
+
+	public static int dx[] = {-1, 1, 0, 0};
+	public static int dy[] = {0, -0, -1, 1};
+
 	public static int N; //입력
 	public static int graph[][]; //아파트 단지 배열
 	public static boolean visited[][]; //아파트 단지 방문여부
-	
-	public static int total = 0; //총 단지 수 
+
 	//각 단지의 수를 저장 
-	public static ArrayList<Integer> apart = new ArrayList<>(); 
-	
-	
+	public static ArrayList<Integer> apart = new ArrayList<>();
+
+
 	//BFS 구현
 	public static void BFS(int x, int y) {
+		int cnt = 0;
 		Queue<Point> q = new LinkedList<>();
 		q.offer(new Point(x, y));
 		visited[x][y] = true; //방문 처리
-		
-		
+
+
 		while(!q.isEmpty()) {
 			Point point = q.poll();
-			total++;
-			
+			cnt++; 
+
 			for (int i = 0; i < 4; i++) {
 				int nx = point.x + dx[i];
 				int ny = point.y + dy[i];
-				
+
 				if(nx < N && ny < N && nx >= 0 && ny >= 0) {
 					if(!visited[nx][ny] && graph[nx][ny] == 1) {
 						visited[nx][ny] = true;
@@ -56,17 +57,18 @@ public class B2667 {
 				}
 			}
 		}
+		apart.add(cnt);
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
+
 		N = Integer.parseInt(br.readLine());
-		
+
 		graph = new int[N][N]; //전체 크기
 		visited = new boolean[N][N]; //방문 체크 
-		
+
 		for (int i = 0; i < N; i++) {
 			String s = br.readLine();
 			for (int j = 0; j < N; j++) {
@@ -74,25 +76,24 @@ public class B2667 {
 				graph[i][j] = s.charAt(j) - '0'; //한 문자만 입력받을 수 있게 형변환 한다
 			}
 		}
-		
+
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				if(graph[i][j] == 1 && !visited[i][j]) {
-					total++;
 					BFS(i, j); //BFS 실행 
-					apart.add(total);
-				}
 				}
 			}
-		
+		}
+
 		bw.write(apart.size() + "\n"); //총 단지 수 
-		
+
 		Collections.sort(apart);
+
 		//각 아파트 단지의 개수 
 		for (int i = 0; i < apart.size(); i++) {
 			bw.write(apart.get(i) + "\n");
 		}
-		
+
 		bw.flush();
 		bw.close();
 	}
