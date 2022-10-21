@@ -16,12 +16,25 @@ public class B_1012 {
 	public static int dy[] = {1, -1, 0, 0};
 	
 	static int T, N, M, K;
-	static int total; //배추흰지렁이 개수
+	static int total = 0; //배추흰지렁이 개수
 	static boolean visited[][]; //방문 체크 
 	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 	
+	
 	public static void DFS(int x, int y) {
+		visited[x][y] = true;
+		total++;
 		
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+			
+			if(nx >= 0 && ny >= 0 && nx < N && ny < N) {
+				if(!visited[nx][ny] && graph.get(nx).get(ny) == 1) {
+					DFS(nx, ny);
+				}
+			}
+		}
 	}
 	
 	
@@ -48,8 +61,8 @@ public class B_1012 {
 			}
 		}
 		
+		bw.write(total + "\n");
 		bw.flush();
 		bw.close();
 	}
 }
-
