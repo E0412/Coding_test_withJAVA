@@ -20,44 +20,60 @@ public class B_1012 {
 	static boolean visited[][]; //방문 체크 
 	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
 	
-	
+	//DFS 실행 
 	public static void DFS(int x, int y) {
 		visited[x][y] = true;
-		total++;
 		
 		for (int i = 0; i < 4; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
 			
-			if(nx >= 0 && ny >= 0 && nx < N && ny < N) {
+			if(nx >= 0 && ny >= 0 && nx < N && ny < M) {
 				if(!visited[nx][ny] && graph.get(nx).get(ny) == 1) {
 					DFS(nx, ny);
+					total++;
 				}
 			}
 		}
 	}
 	
-	
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		StringTokenizer st;
 		
 		T = Integer.parseInt(br.readLine()); //테스트케이스 개수 
 		
-		N = Integer.parseInt(st.nextToken()); //가로
-		M = Integer.parseInt(st.nextToken()); //세로
-		K = Integer.parseInt(st.nextToken()); //배추
-		
-		visited = new boolean[N][M];
-		
-		for (int i = 0; i < N; i++) {
-			graph.add(new ArrayList<>());
-		}
-		
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				DFS(i, j);
+		//테스트 케이스만큼 반복 
+		for (int i = 0; i < T; i++) {
+			st = new StringTokenizer(br.readLine());
+			N = Integer.parseInt(st.nextToken()); //가로
+			M = Integer.parseInt(st.nextToken()); //세로
+			K = Integer.parseInt(st.nextToken()); //배추
+
+			visited = new boolean[N][M];
+
+			//그래프 크기 할당 
+			for(int k = 0; k < N; k++) {
+				graph.add(new ArrayList<Integer>());
+			}
+			
+			//배추의 위치 입력받기 
+			for (int j = 0; j < K; j++) {
+				st = new StringTokenizer(br.readLine());
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				
+				graph.get(a).add(b);
+				graph.get(b).add(a);
+			}
+			
+			for (int x = 0; x < N; x++) {
+				for (int y = 0; y < M; y++) {
+					if(graph.get(x).get(y) == 1 && !visited[x][y]) {
+						DFS(x, y);
+					}
+				}
 			}
 		}
 		
