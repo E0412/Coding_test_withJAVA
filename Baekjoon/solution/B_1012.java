@@ -16,9 +16,8 @@ public class B_1012 {
 	public static int dy[] = {1, -1, 0, 0};
 	
 	static int T, N, M, K;
-	static int total = 0; //배추흰지렁이 개수
 	static boolean visited[][]; //방문 체크 
-	static ArrayList<ArrayList<Integer>> graph = new ArrayList<>();
+	static int graph[][];
 	
 	//DFS 실행 
 	public static void DFS(int x, int y) {
@@ -29,9 +28,8 @@ public class B_1012 {
 			int ny = y + dy[i];
 			
 			if(nx >= 0 && ny >= 0 && nx < N && ny < M) {
-				if(!visited[nx][ny] && graph.get(nx).get(ny) == 1) {
+				if(!visited[nx][ny] && graph[nx][ny] == 1) {
 					DFS(nx, ny);
-					total++;
 				}
 			}
 		}
@@ -46,17 +44,17 @@ public class B_1012 {
 		
 		//테스트 케이스만큼 반복 
 		for (int i = 0; i < T; i++) {
+			
+			//배추 흰지렁이 개수, 초기화 되야하는 값이기 때문에 static을 붙이면 안된다 
+			int total = 0;
+			
 			st = new StringTokenizer(br.readLine());
 			N = Integer.parseInt(st.nextToken()); //가로
 			M = Integer.parseInt(st.nextToken()); //세로
 			K = Integer.parseInt(st.nextToken()); //배추
 
 			visited = new boolean[N][M];
-
-			//그래프 크기 할당 
-			for(int k = 0; k < N; k++) {
-				graph.add(new ArrayList<Integer>());
-			}
+			graph = new int[N][M];
 			
 			//배추의 위치 입력받기 
 			for (int j = 0; j < K; j++) {
@@ -64,20 +62,20 @@ public class B_1012 {
 				int a = Integer.parseInt(st.nextToken());
 				int b = Integer.parseInt(st.nextToken());
 				
-				graph.get(a).add(b);
-				graph.get(b).add(a);
+				graph[a][b] = 1; 
 			}
 			
 			for (int x = 0; x < N; x++) {
 				for (int y = 0; y < M; y++) {
-					if(graph.get(x).get(y) == 1 && !visited[x][y]) {
+					if(graph[x][y] == 1 && !visited[x][y]) {
 						DFS(x, y);
+						total++; 
 					}
 				}
 			}
+			bw.write(total + "\n");
 		}
 		
-		bw.write(total + "\n");
 		bw.flush();
 		bw.close();
 	}
