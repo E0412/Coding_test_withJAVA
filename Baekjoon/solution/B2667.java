@@ -9,17 +9,6 @@ import java.util.*;
  * 첫 번째 줄에는 총 단지수를 출력
  * 각 단지내 집의 수를 오름차순으로 정렬하여 한 줄에 하나씩 출력
  */
-class Point {
-	int x; 
-	int y;
-
-	public Point(int x, int y) {
-		super();
-		this.x = x;
-		this.y = y;
-	}
-}
-
 public class B2667 {
 
 	public static int dx[] = {-1, 1, 0, 0};
@@ -36,23 +25,23 @@ public class B2667 {
 	//BFS 구현
 	public static void BFS(int x, int y) {
 		int cnt = 0;
-		Queue<Point> q = new LinkedList<>();
-		q.offer(new Point(x, y));
+		Queue<int[]> q = new LinkedList<>();
+		q.offer(new int[] {x, y});
 		visited[x][y] = true; //방문 처리
 
 
 		while(!q.isEmpty()) {
-			Point point = q.poll();
+			int point[] = q.poll();
 			cnt++; 
 
 			for (int i = 0; i < 4; i++) {
-				int nx = point.x + dx[i];
-				int ny = point.y + dy[i];
+				int nx = point[0] + dx[i];
+				int ny = point[1] + dy[i];
 
 				if(nx < N && ny < N && nx >= 0 && ny >= 0) {
 					if(!visited[nx][ny] && graph[nx][ny] == 1) {
 						visited[nx][ny] = true;
-						q.offer(new Point(nx, ny));
+						q.offer(new int[] {nx, ny});
 					}
 				}
 			}
