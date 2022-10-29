@@ -3,6 +3,7 @@ package solution;
 import java.io.*;
 import java.util.*;
 
+
 //나이트의 이동(BFS) 
 /*
 * 테스트 케이스, 체스판 한 변의 길이, 현재 나이트의 위치, 나이트의 이동 위치 입력
@@ -47,7 +48,8 @@ public class B_7562 {
 
 				if(nx >= 0 && ny >= 0 && nx < N && ny < N
 						&& !visited[nx][ny]) {
-					q.offer(point);
+					//point를 할당해서 이동거리를 세지못했음
+					q.offer(new Poi(nx, ny)); 
 					visited[nx][ny] = true;
 					graph[nx][ny] = graph[point.x][point.y] + 1;
 				}
