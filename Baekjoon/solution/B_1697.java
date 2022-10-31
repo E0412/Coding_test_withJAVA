@@ -10,34 +10,58 @@ import java.util.*;
  * 순간이동을 하는 경우에는 1초 후에 2*X의 위치로 이동
  * 수빈이가 동생을 찾을 수 있는 가장 빠른 시간
  */
-class Pnt {
-	int x, y;
-
-	public Pnt(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-}
 public class B_1697 {
 
 	static int N, M; //수빈이와 동생의 위치
-	static int time; //동생을 찾는 최소시간 
-	static boolean visited[][];
-	static int graph[][];
-	
-	static void BFS() {
+	static int visited[] = new int[100001]; //(0 ≤ N ≤ 100,000)
+
+	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+
+	static void BFS(int input) throws IOException {
 		Queue<Integer> q = new LinkedList<Integer>();
-		
-		
+		q.offer(input);
+		visited[input] = 1; //방문 처리
+
+		while(!q.isEmpty()) {
+			int x = q.poll();
+
+			for (int i = 0; i < 3; i++) {
+				int next;
+
+				if(i == 0) {
+					next = x + 1; //걷는 경우 1
+				} else if(i == 1) {
+					next = x - 1; //걷는경우 2
+				} else {
+					next = x * 2; //순간이동 하는 경우 
+				}
+
+				if(next == M) {
+					bw.write(visited[x] + "");
+					return; //return을 하지 않는 경우 ArrayIndexOutOfBoundsException 발생
+				}
+
+				//next가 범위 안에 있고 이전에 방문하지 않은 경우 
+				if(next >= 0 && visited[next] == 0 && next < visited.length) {
+					q.offer(next);
+					visited[next] = visited[x] + 1;
+				}
+			}
+		}
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		
+
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
+
+		if(N == M) {
+			bw.write(0 + ""); 
+		} else {
+			BFS(N);
+		}
 
 		bw.flush();
 		bw.close();
