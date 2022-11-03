@@ -3,30 +3,49 @@ package solution;
 import java.io.*;
 import java.util.*;
 
+
 //섬의 개수(BFS)
 /*
  * 섬과 바다 지도가 주어질 때 각 테스트케이스의 섬의 개수를 센다
- * 50보다 작거나 같은 양의 정수 너비 w 높이 h
+ * 너비 w 높이 h, 연결되어 있으면 섬 
  * 1은 땅 0은 바다 입력의 마지막 줄에는 0이 두 개 주어진다.
  */
 public class B_4963 {
 
+	//상하좌우, 대각선  
+	static int dx[] = {-1, 0, 1, -1, 1, -1, 0, 1};
+	static int dy[] = {-1, -1, -1, 0, 0, 1, 1, 1};
+
+
 	static int graph[][];
-	static boolean visited[][];
+	static boolean visited[][]; //체크 방문시 1로 변경 
 
 	static int W, H;
 
 
-	static void BFS(int x, int y) {
+
+	static void BFS(int x, int y) throws IOException {
 		Queue<int[]> q = new LinkedList<>();
 		q.offer(new int[] {x, y});
-		int cnt = 0; //섬의 개수 
+		visited[x][y] = true;
+
 
 		while(!q.isEmpty()) {
 			int[] point = q.poll();
 
-		}
+			for (int i = 0; i < 8; i++) {
+				int nx = point[0] + dx[i];
+				int ny = point[1] + dy[i];
 
+
+				if(nx >= 0 && ny >= 0 && nx < W && ny < H) {
+					if(!visited[nx][ny] && graph[nx][ny] == 1) {
+						visited[nx][ny] = true;
+						q.offer(new int[] {nx, ny});
+					}
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -41,11 +60,33 @@ public class B_4963 {
 			int W = Integer.parseInt(st.nextToken());
 			int H = Integer.parseInt(st.nextToken());
 
+			int cnt = 0; //섬의 개수 
 
+			if(W == 0 && H == 0) {
+				return;
+			}
+
+			graph = new int[W][H];
+			visited = new boolean[W][H];
+
+			for (int n = 0; n < W; n++) {
+				for (int m = 0; m < H; m++) {
+					st = new StringTokenizer(br.readLine());
+					graph[n][m] = Integer.parseInt(st.nextToken());
+				}
+			}
+
+			for (int n = 0; n < W; n++) {
+				for (int m = 0; m < H; m++) {
+					if(graph[n][m]== 1 && !visited[n][m]) {
+						BFS(n, m);
+						cnt++;
+					}
+				}
+			}
+			bw.write(cnt + "\n");
 		}
-		
 		bw.flush();
 		bw.close();
 	}
 }
-
