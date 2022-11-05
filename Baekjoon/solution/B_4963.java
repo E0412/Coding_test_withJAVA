@@ -12,15 +12,6 @@ import java.util.*;
  */
 public class B_4963 {
 
-	static class Po {
-		int x, y;
-
-		public Po(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-	}
-
 	//상하좌우, 대각선  
 	static int dx[] = {-1, 0, 1, -1, 1, -1, 0, 1};
 	static int dy[] = {-1, -1, -1, 0, 0, 1, 1, 1};
@@ -32,23 +23,23 @@ public class B_4963 {
 
 
 	static void BFS(int x, int y) {
-		Queue<Po> q = new LinkedList<>();
+		Queue<int[]> q = new LinkedList<>();
 		visited[x][y] = true;
-		q.offer(new Po(x, y));
+		q.offer(new int[] {x, y});
 
 
 		while(!q.isEmpty()) {
-			Po point = q.poll();
+			int[] point = q.poll();
 
 			for (int i = 0; i < 8; i++) {
-				int nx = point.x + dx[i];
-				int ny = point.y + dy[i];
+				int nx = point[0] + dx[i];
+				int ny = point[1] + dy[i];
 
 
 				if(nx >= 0 && ny >= 0 && nx < H && ny < W) {
 					if(!visited[nx][ny] && graph[nx][ny] == 1) {
 						visited[nx][ny] = true;
-						q.offer(new Po(nx, ny));
+						q.offer(new int[] {nx, ny});
 					}
 				}
 			}
@@ -64,8 +55,9 @@ public class B_4963 {
 		while(true) {
 			st = new StringTokenizer(br.readLine());
 
-			int W = Integer.parseInt(st.nextToken());
-			int H = Integer.parseInt(st.nextToken());
+			//입력을 int W로 받아서 cnt가 제대로 출력되지 않았음 
+			W = Integer.parseInt(st.nextToken());
+			H = Integer.parseInt(st.nextToken());
 
 			if(W == 0 && H == 0) break;
 
