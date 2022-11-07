@@ -22,35 +22,42 @@ public class B4963 {
 
 	static void DFS(int x, int y ) {
 		visited[x][y] = true;
-		
+
 		//탐색 
 		for (int i = 0; i < 8; i++) {
-		
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if(nx >= 0 && ny >= 0 && nx < H && ny < W) {
+				if(!visited[nx][ny] && graph[nx][ny] == 1) {
+					DFS(nx, ny);
+				}
+			}
 		}
-		
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st;
-		
+
 		//테스트 케이스만큼 반복 
 		while(true) {
 			st = new StringTokenizer(br.readLine());
-			
+
 			W = Integer.parseInt(st.nextToken());
 			H = Integer.parseInt(st.nextToken());
 
 			if(W == 0 && H == 0) break;
-			
+
 			int cnt = 0;
 			graph = new int[H][W];
 			visited = new boolean[H][W];
-			
+
 			for (int i = 0; i < H; i++) {
+				st = new StringTokenizer(br.readLine());
+
 				for (int j = 0; j < W; j++) {
-					st = new StringTokenizer(br.readLine());
 					graph[i][j] = Integer.parseInt(st.nextToken()); 
 				}
 			}
