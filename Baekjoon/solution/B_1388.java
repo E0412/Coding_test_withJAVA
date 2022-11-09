@@ -3,6 +3,7 @@ package solution;
 import java.util.*;
 import java.io.*;
 
+
 //바닥 장식(DFS)
 /*  '-'와 '|'로 이루어진 바닥 장식 모양이 주어질 때,
  *  만약 두 개의 '-'가 인접해 있고, 같은 행에 있다면, 두 개는 같은 나무 판자이고, 
@@ -30,7 +31,22 @@ public class B_1388 {
 				graph[i][j] = s.charAt(j);
 			}
 		}
-
+		
+		//2차원 배열 탐색
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				// '|'가 위,아래로 이어져 있으면 한 개로 취급하여 개수에 더하지 않는다 
+				if(i != 0 && graph[i][j] == '|' && graph[i - 1][j] == '|') {
+					continue;
+				} 
+				// '-'가 좌,우로 이어져 있으면 한 개로 취급하여 개수에 더하지 않는다 
+				if(j != 0 && graph[i][j] == '-' && graph[i][j - 1] == '-') {
+					continue;
+				}
+				cnt++;
+			}
+		}
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
