@@ -3,7 +3,7 @@ package solution;
 import java.io.*;
 import java.util.*;
 
-//토마토(DFS)
+//토마토(BFS)
 /*
  * 토마토가 익는 최소 일수, 인접한 토마토만 익는다 
  * 1은 익은 토마토, 0은 익지않은 토마토, -1은 빈칸 
@@ -20,17 +20,23 @@ public class B_7576 {
 	static boolean visited[][]; //방문 체크 
 	static int graph[][];
 
-	static void DFS(int x, int y) {
+	static void BFS(int x, int y) {
+		Queue<int[]> q = new LinkedList<>();
+		q.offer(new int[] {x, y});
 		visited[x][y] = true;
 
-		for (int i = 0; i < 4; i++) {
-			int nx = x + dx[i];
-			int ny = y + dy[i];
+		while(!q.isEmpty()) {
+			int point[] = q.poll();
 
-			if(nx >= 0 && ny >= 0 && nx < N && ny < M) {
-				if(!visited[nx][ny] && graph[nx][ny] == 1) {
-					DFS(nx, ny);
-					cnt++;
+			for (int i = 0; i < 4; i++) {
+				int nx = point[0] + dx[i];
+				int ny = point[1] + dy[i];
+
+				if(nx >= 0 && ny >= 0 && nx < M && ny < N) {
+					if(!visited[nx][ny] && graph[nx][ny] == 1) {
+						q.offer(new int[] {nx, ny});
+						cnt++;
+					}
 				}
 			}
 		}
@@ -41,26 +47,26 @@ public class B_7576 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		N = Integer.parseInt(st.nextToken());
-		M = Integer.parseInt(st.nextToken());
+		N = Integer.parseInt(st.nextToken()); //가로
+		M = Integer.parseInt(st.nextToken()); //세로
 
-		graph = new int[N][M];
-		visited = new boolean[N][M];
+		graph = new int[M][N];
+		visited = new boolean[M][N];
 
-		for (int i = 0; i < N; i++) {
+		for (int i = 0; i < M; i++) {
 			String s = br.readLine();
-			for (int j = 0; j < M; j++) {
+			for (int j = 0; j < N; j++) {
 				graph[i][j] = s.charAt(j) - '0'; 
 			}
 		}
 
-		for (int i = 0; i < N; i++) {
-			for (int j = 0; j < M; j++) {
-				DFS(i, j);
+		for (int i = 0; i < M; i++) {
+			for (int j = 0; j < N; j++) {
+				BFS(i, j);
 			}
 		}
 
-		bw.write(cnt);
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
