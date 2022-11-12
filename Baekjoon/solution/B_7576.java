@@ -17,13 +17,10 @@ public class B_7576 {
 
 	static int N, M;
 	static int cnt = 0; 
-	static boolean visited[][]; //방문 체크 
-	static int graph[][];
+	static int graph[][]; //토마토 판
+	static Queue<int[]> q = new LinkedList<>();
 
-	static void BFS(int x, int y) {
-		Queue<int[]> q = new LinkedList<>();
-		q.offer(new int[] {x, y});
-		visited[x][y] = true;
+	static int BFS() {
 
 		while(!q.isEmpty()) {
 			int point[] = q.poll();
@@ -33,13 +30,29 @@ public class B_7576 {
 				int ny = point[1] + dy[i];
 
 				if(nx >= 0 && ny >= 0 && nx < M && ny < N) {
-					if(!visited[nx][ny] && graph[nx][ny] == 1) {
-						q.offer(new int[] {nx, ny});
-						cnt++;
+					//토마토가 익지 않은 경우  
+					if(graph[nx][ny] == 0) {
+						q.offer(new int[] {nx, ny}); //익은 토마토 추가
+
+						//날짜를 얻기 위해 전 값에서 1 증가
+						graph[nx][ny] = graph[point[0]][point[1]] + 1;
 					}
 				}
 			}
 		}
+		cnt = Integer.MIN_VALUE; //최대 날짜 
+
+		for (int i = 0; i < M; i++) {
+			for (int j = 0; j < N; j++) {
+				//익지 않은 토마토가 있는 경우 -1 반환 
+				if(graph[i][j] == 0) return -1;
+
+				//날짜 최댓값 구하기 
+				cnt = Math.max(cnt, graph[i][j]);
+			}
+		}
+		//모두 익은 경우 0 모두 익지 못하는 경우 -1 출력
+		return cnt;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -51,23 +64,20 @@ public class B_7576 {
 		M = Integer.parseInt(st.nextToken()); //세로
 
 		graph = new int[M][N];
-		visited = new boolean[M][N];
 
 		for (int i = 0; i < M; i++) {
 			String s = br.readLine();
 			for (int j = 0; j < N; j++) {
 				graph[i][j] = s.charAt(j) - '0'; 
+				//토마토가 익은 경우 큐에 할당 
+				if(graph[i][j] == 1) {
+					q.offer(new int[] {i, j});
+				}
+				bw.write(BFS());
 			}
 		}
-
-		for (int i = 0; i < M; i++) {
-			for (int j = 0; j < N; j++) {
-				BFS(i, j);
-			}
-		}
-
-		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
 }
+
