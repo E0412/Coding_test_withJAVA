@@ -16,7 +16,6 @@ public class B_7576 {
 	public static int dy[] = {1, -1, 0, 0};
 
 	static int N, M;
-	static int cnt = 0; 
 	static int graph[][]; //토마토 판
 	static Queue<int[]> q = new LinkedList<>();
 
@@ -40,19 +39,24 @@ public class B_7576 {
 				}
 			}
 		}
-		cnt = Integer.MIN_VALUE; //최대 날짜 
+		int cnt = Integer.MIN_VALUE; //최대 날짜 
 
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < N; j++) {
 				//익지 않은 토마토가 있는 경우 -1 반환 
-				if(graph[i][j] == 0) return -1;
-
+				if(graph[i][j] == 0) {
+					return -1;
+				}
 				//날짜 최댓값 구하기 
 				cnt = Math.max(cnt, graph[i][j]);
 			}
 		}
-		//모두 익은 경우 0 모두 익지 못하는 경우 -1 출력
-		return cnt;
+		//모두 익은 경우 0 반환
+		if(cnt == 1) {
+			return 0;
+		} else {
+			return cnt - 1; //걸린 일수 = 최대 날짜 - 1
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -73,9 +77,9 @@ public class B_7576 {
 				if(graph[i][j] == 1) {
 					q.offer(new int[] {i, j});
 				}
-				bw.write(BFS());
 			}
 		}
+		bw.write(BFS() + "");
 		bw.flush();
 		bw.close();
 	}
