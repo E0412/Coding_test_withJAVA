@@ -69,10 +69,12 @@ public class B_7576 {
 
 		graph = new int[M][N];
 
+		//-1만 출력되던 오류 input 방식을 바꿔서 해결
 		for (int i = 0; i < M; i++) {
-			String s = br.readLine();
+			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < N; j++) {
-				graph[i][j] = s.charAt(j) - '0'; 
+				graph[i][j] = Integer.parseInt(st.nextToken());
+
 				//토마토가 익은 경우 큐에 할당 
 				if(graph[i][j] == 1) {
 					q.offer(new int[] {i, j});
