@@ -22,6 +22,19 @@ public class B_2583 {
 
 	static void DFS(int x, int y) {
 		graph[x][y] = 1; 
+		cnt++; //영역의 넓이 ++ 
+
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if(nx >= 0 && ny >= 00 && nx < M && ny < N) {
+				//방문하지 않았을 때
+				if(graph[nx][ny] == 0) {
+					DFS(nx, ny); //DFS 실행 
+				}
+			}
+		}
 	}
 
 
@@ -69,11 +82,11 @@ public class B_2583 {
 
 		bw.write(list.size() + "\n"); //영역의 개수
 
-		Collections.sort(list);
+		Collections.sort(list); //정렬 
 
 		//각 영역의 넓이
 		for (int i = 0; i < list.size(); i++) {
-			bw.write(list.get(i) + "");
+			bw.write(list.get(i) + " ");
 		}
 
 		bw.flush();
