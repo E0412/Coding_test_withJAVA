@@ -28,6 +28,23 @@ public class B2583 {
 		Queue<int[]> q = new LinkedList<int[]>();
 		q.offer(new int[] {x, y});
 		visited[x][y] = true; 
+
+		while(!q.isEmpty()) {
+			int[] p = q.poll();
+
+			for (int i = 0; i < 4; i++) {
+				int nx = p[0] + dx[i];
+				int ny = p[1] + dy[i];
+
+				if(nx >= 0 && ny >= 0 && nx < M && ny < N) {
+					if(!visited[nx][ny] && graph[nx][ny] == 1) {
+						cnt++;
+						visited[nx][ny] = true;
+						q.offer(new int[] {nx, ny});
+					}
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -63,10 +80,10 @@ public class B2583 {
 			for (int j = 0; j < N; j++) {
 				if(graph[i][j] == 1 && !visited[i][j]) {
 					BFS(i, j);
+					list.add(cnt);
 				}
 			}
 		}
-
 
 		bw.write(list.size() + "\n");
 
@@ -75,9 +92,7 @@ public class B2583 {
 		for(Integer result : list) {
 			bw.write(result + " ");
 		}
-
 		bw.flush();
 		bw.close();
 	}
 }
-
