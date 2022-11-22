@@ -28,7 +28,8 @@ public class B2583 {
 		Queue<int[]> q = new LinkedList<int[]>();
 		q.offer(new int[] {x, y});
 		visited[x][y] = true; 
-
+		cnt = 1;
+		
 		while(!q.isEmpty()) {
 			int[] p = q.poll();
 
@@ -37,7 +38,7 @@ public class B2583 {
 				int ny = p[1] + dy[i];
 
 				if(nx >= 0 && ny >= 0 && nx < M && ny < N) {
-					if(!visited[nx][ny] && graph[nx][ny] == 1) {
+					if(!visited[nx][ny] && graph[nx][ny] == 0) {
 						cnt++;
 						visited[nx][ny] = true;
 						q.offer(new int[] {nx, ny});
@@ -78,7 +79,7 @@ public class B2583 {
 
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < N; j++) {
-				if(graph[i][j] == 1 && !visited[i][j]) {
+				if(graph[i][j] == 0 && !visited[i][j]) {
 					BFS(i, j);
 					list.add(cnt);
 				}
