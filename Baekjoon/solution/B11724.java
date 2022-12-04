@@ -23,8 +23,10 @@ public class B11724 {
 		while(!q.isEmpty()) {
 			int p = q.poll();
 
-			for (int i = 0; i < N; i++) {
-				if(graph[p][i] == 0 && !visited[i]) {
+			//1부터 시작 
+			for (int i = 1; i < N + 1; i++) {
+				//그래프가 할당되어있고, 방문하지 않은 배열의 경우 
+				if(graph[p][i] == 1 && !visited[i]) {
 					visited[i] = true;
 					q.offer(i);
 				}
