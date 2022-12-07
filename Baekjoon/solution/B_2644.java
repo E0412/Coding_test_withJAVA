@@ -14,8 +14,29 @@ public class B_2644 {
 	static int[][] graph; //2차원 배열 그래프
 	static boolean[] visited; //방문 체크
 
-	static void BFS(int x, int y) {
+	static int BFS(int x, int y) {
+		int result = 0; //촌수 계산 변수 
 		Queue<Integer> q = new LinkedList<Integer>();
+		//한 점에서 시작한다 
+		q.offer(x); 
+
+		while(!q.isEmpty()) {
+			int point = q.poll();
+			visited[point] = true; //방문 처리
+
+			//끝점과 만나면 결과 반환 
+			if(point == y) {
+				return result; 
+			}
+
+			for (int i = 1; i <= n; i++) {
+				if(graph[point][i] == 1 && !visited[i]) {
+					q.offer(i);
+				}
+			}
+			result++; 
+		}
+		return -1;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -45,6 +66,7 @@ public class B_2644 {
 			graph[x][y] = graph[y][x] = 1;  
 		}
 
+		bw.write(BFS(N, M) + "");
 		bw.flush();
 		bw.close();
 	}
