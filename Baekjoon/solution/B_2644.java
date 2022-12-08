@@ -21,17 +21,22 @@ public class B_2644 {
 		q.offer(x); 
 
 		while(!q.isEmpty()) {
-			int point = q.poll();
-			visited[point] = true; //방문 처리
+			int size = q.size();
 
-			//끝점과 만나면 결과 반환 
-			if(point == y) {
-				return result; 
-			}
+			//큐에 할당된 크기만큼 반복 
+			for (int k = 0; k < size; k++) {
+				int point = q.poll();
+				visited[point] = true; //방문 처리
 
-			for (int i = 1; i <= n; i++) {
-				if(graph[point][i] == 1 && !visited[i]) {
-					q.offer(i);
+				//끝점과 만나면 결과 반환 
+				if(point == y) {
+					return result; 
+				}
+
+				for (int i = 1; i <= n; i++) {
+					if(graph[point][i] == 1 && !visited[i]) {
+						q.offer(i);
+					}
 				}
 			}
 			result++; 
