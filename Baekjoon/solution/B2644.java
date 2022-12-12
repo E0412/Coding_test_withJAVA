@@ -13,9 +13,21 @@ public class B2644 {
 	static int n, m, N, M;
 	static int[][] graph; //2차원 배열 그래프
 	static boolean[] visited; //방문 체크
+	static int result = -1; //촌수  
 
 	static void DFS(int x, int y) {
+		visited[x] = true;
 
+		for (int i = 0; i < graph.length; i++) {
+			if(!visited[i]) {
+				if(i == y) {
+					result = y + 1;
+					return; 
+				}
+				//다음 촌수로 이동
+				DFS(i, y + 1);
+			}
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -44,7 +56,8 @@ public class B2644 {
 			//무방향 그래프 할당 
 			graph[x][y] = graph[y][x] = 1;  
 		}
-		DFS(N, M);
+		DFS(N, 0); //시작 
+		bw.write(result + "");
 		bw.flush();
 		bw.close();
 	}
