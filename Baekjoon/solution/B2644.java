@@ -18,12 +18,14 @@ public class B2644 {
 	static void DFS(int x, int y) {
 		visited[x] = true;
 
-		for (int i = 0; i < graph.length; i++) {
-			if(!visited[i]) {
-				if(i == y) {
-					result = y + 1;
-					return; 
-				}
+		//목표에 도달한 경우 
+		if(x == M) {
+			result = y;
+			return; 
+		}
+
+		for (int i = 1; i <= N; i++) {
+			if(graph[x][i] == 1 && !visited[i]) {
 				//다음 촌수로 이동
 				DFS(i, y + 1);
 			}
