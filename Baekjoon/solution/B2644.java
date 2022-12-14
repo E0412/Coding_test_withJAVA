@@ -11,7 +11,7 @@ import java.util.*;
 public class B2644 {
 
 	static int n, m, N, M;
-	static int[][] graph; //2차원 배열 그래프
+	static ArrayList<ArrayList<Integer>> graph; //양방향 인접리스트
 	static boolean[] visited; //방문 체크
 	static int result = -1; //촌수  
 
@@ -25,7 +25,7 @@ public class B2644 {
 		}
 
 		for (int i = 1; i <= N; i++) {
-			if(graph[x][i] == 1 && !visited[i]) {
+			if(!visited[i]) {
 				//다음 촌수로 이동
 				DFS(i, y + 1);
 			}
@@ -37,10 +37,13 @@ public class B2644 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		n = Integer.parseInt(br.readLine()); //전체 사람 수 
-
-		//그래프 할당
-		graph = new int[n+1][n+1];
 		visited = new boolean[n+1];
+		graph = new ArrayList<ArrayList<Integer>>();
+		
+		//그래프 할당
+		for (int i = 0; i <= n; i++) {
+			graph.add(new ArrayList<>());
+		}
 
 		//촌수를 계산해야하는 서로 다른 두 사람의 번호
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -56,7 +59,8 @@ public class B2644 {
 			int y = Integer.parseInt(st.nextToken());
 
 			//무방향 그래프 할당 
-			graph[x][y] = graph[y][x] = 1;  
+			graph.get(x).add(y);
+			graph.get(y).add(x);
 		}
 		DFS(N, 0); //시작 
 		bw.write(result + "");
