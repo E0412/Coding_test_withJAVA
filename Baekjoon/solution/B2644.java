@@ -18,16 +18,16 @@ public class B2644 {
 	static void DFS(int x, int y) {
 		visited[x] = true;
 
-		//목표에 도달한 경우 
-		if(x == M) {
-			result = y;
-			return; 
-		}
-
-		for (int i = 1; i <= N; i++) {
-			if(!visited[i]) {
+		for (int point : graph.get(x)) {
+			//방문하지 않았을 때 
+			if(!visited[point]) {
+				//목표에 도달한 경우 
+				if(point == M) {
+					result = y + 1;
+					return; 
+				}
 				//다음 촌수로 이동
-				DFS(i, y + 1);
+				DFS(point, y + 1);
 			}
 		}
 	}
@@ -39,7 +39,7 @@ public class B2644 {
 		n = Integer.parseInt(br.readLine()); //전체 사람 수 
 		visited = new boolean[n+1];
 		graph = new ArrayList<ArrayList<Integer>>();
-		
+
 		//그래프 할당
 		for (int i = 0; i <= n; i++) {
 			graph.add(new ArrayList<>());
