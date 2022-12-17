@@ -13,9 +13,9 @@ public class B_2644 {
 	static int n, m, N, M;
 	static ArrayList<ArrayList<Integer>> graph; //이중 ArrayList
 	static boolean[] visited; //방문 체크
+	static int result = -1; //촌수 계산 변수 
 
-	static int BFS(int x, int y) {
-		int result = 0; //촌수 계산 변수 
+	static void BFS(int x, int y) {
 		Queue<Integer> q = new LinkedList<Integer>();
 		//한 점에서 시작한다 
 		q.offer(x); 
@@ -28,20 +28,18 @@ public class B_2644 {
 				int point = q.poll();
 				visited[point] = true; //방문 처리
 
-				//끝점과 만나면 결과 반환 
-				if(point == y) {
-					return result; 
-				}
-
 				for (int i : graph.get(x)) {
 					if(!visited[i]) {
+						//끝점과 만나면 결과 반환 
+						if(point == M) {
+							result = y + 1;
+						}
 						q.offer(i);
 					}
+					result++;
 				}
 			}
-			result++; 
 		}
-		return -1;
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -75,8 +73,8 @@ public class B_2644 {
 			graph.get(x).add(y);
 			graph.get(y).add(x);
 		}
-
-		bw.write(BFS(N, M) + "");
+		BFS(N, 0);
+		bw.write(result + "");
 		bw.flush();
 		bw.close();
 	}
