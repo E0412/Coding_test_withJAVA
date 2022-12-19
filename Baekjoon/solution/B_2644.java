@@ -12,35 +12,35 @@ public class B_2644 {
 
 	static int n, m, N, M;
 	static ArrayList<ArrayList<Integer>> graph; //이중 ArrayList
-	static boolean[] visited; //방문 체크
+	static int[] cnt; 
 	static int result = -1; //촌수 계산 변수 
 
-	static void BFS(int x, int y) {
+	static int BFS(int x) {
 		Queue<Integer> q = new LinkedList<Integer>();
 		//한 점에서 시작한다 
-		q.offer(x); 
+		cnt[x] = 0;
+		q.offer(x);
 
 		while(!q.isEmpty()) {
-			int size = q.size();
+			//확인할 사람은 큐에서 제외
+			int point = q.poll();
 
-			//큐에 할당된 크기만큼 반복 
-			for (int k = 0; k < size; k++) {
-				int point = q.poll();
-				visited[point] = true; //방문 처리
+			//비교대상을 찾으면 촌수 저장
+			if(point == M) {
+				result = cnt[point];
+				break;
+			}
 
-				for (int i : graph.get(x)) {
-					if(!visited[i]) {
-						//끝점과 만나면 결과 반환 
-						if(point == M) {
-							result = y + 1;
-						}
-						q.offer(i);
-					}
-					result++;
-				}
+			for (int i : graph.get(point)) {
+				//촌수를 확인한 경우 
+				if(cnt[i] != -1) continue;
+				cnt[i] = cnt[point] + 1; //다음 관계에 현재 촌수 + 1
+				q.offer(i);
 			}
 		}
+		return result;
 	}
+
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -49,13 +49,15 @@ public class B_2644 {
 		n = Integer.parseInt(br.readLine()); //전체 사람 수 
 
 		graph = new ArrayList<ArrayList<Integer>>();
-		visited = new boolean[n+1];
+		cnt = new int[n + 1]; //촌수 
 
 		//그래프 할당
-		for (int i = 0; i <= n; i++) {
+		for (int i = 0; i < n + 1; i++) {
 			graph.add(new ArrayList<Integer>());
 		}
-
+		//Arrays.fill(배열 변수, 배열 데이터) 값 초기화 
+		Arrays.fill(cnt, -1);
+		
 		//촌수를 계산해야하는 서로 다른 두 사람의 번호
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
@@ -73,7 +75,8 @@ public class B_2644 {
 			graph.get(x).add(y);
 			graph.get(y).add(x);
 		}
-		BFS(N, 0);
+		
+		BFS(N);
 		bw.write(result + "");
 		bw.flush();
 		bw.close();
