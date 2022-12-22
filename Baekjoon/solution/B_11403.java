@@ -11,11 +11,28 @@ import java.util.*;
  */
 public class B_11403 {
 
+	static int N;
 	static int[][] graph;
+	static boolean[] visited;
 
 	//BFS 실행
-	static void BFS(int x) {
+	static void BFS() {
+		for (int i = 0; i < N; i++) {
+			Queue<Integer> q = new LinkedList<Integer>();
+			q.offer(i);
 
+			while(!q.isEmpty()) {
+				int point = q.poll();
+
+				for (int k = 0; k < N; k++) {
+					if(graph[point][k] == 1 && !visited[k]) {
+						visited[k] = true;
+						graph[i][k] = 1;
+						q.offer(k);
+					}
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -23,9 +40,10 @@ public class B_11403 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st;
 
-		int N = Integer.parseInt(br.readLine());
+		N = Integer.parseInt(br.readLine());
 
 		graph = new int[N][N];
+		visited = new boolean[N];
 
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -35,9 +53,17 @@ public class B_11403 {
 			graph[a][b] = graph[b][a] = 1; 
 		}
 
-		bw.write("");
+		BFS();
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				bw.write(graph[i][j] + " ");
+			}
+			bw.write("\n");
+		}
 		bw.flush();
 		bw.close();
 	}
 }
+
 
