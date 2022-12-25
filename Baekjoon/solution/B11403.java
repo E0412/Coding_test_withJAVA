@@ -25,14 +25,25 @@ public class B11403 {
 				graph[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
-		
+
+		for (int i = 0; i < N; i++) {
+			for (int n = 0; n < N; n++) {
+				for (int m = 0; m < N; m++) {
+					//경로 체크
+					if(graph[n][i] == 1 && graph[i][m] == 1) {
+						graph[n][m] = 1; 
+					}
+				}
+			}
+		}
+
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
 				bw.write(graph[i][j] + " ");
 			}
 			bw.write("\n");
 		}
-		
+
 		bw.flush();
 		bw.close();
 	}
