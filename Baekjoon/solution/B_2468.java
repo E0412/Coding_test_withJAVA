@@ -38,13 +38,12 @@ public class B_2468 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st;
 
-		int N = Integer.parseInt(br.readLine());
+		N = Integer.parseInt(br.readLine());
+
 		graph = new int[N][N];
-		visited = new boolean[N][N];
 
-		int max = 1; //최댓값
-		int cnt = 0; //안전 지역 개수 
 
+		//2차원 배열 입력 
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < N; j++) {
@@ -52,23 +51,28 @@ public class B_2468 {
 			}
 		}
 
-		for (int h = 1; h <= 100; h++) {
+		int max = 1; //최댓값
+
+		for (int h = 1; h < 101; h++) {
 			map = new int[N][N];
+			visited = new boolean[N][N];
+
+			int cnt = 0; //안전 지역 개수 
 
 			for (int n = 0; n < N; n++) {
 				for (int m = 0; m < N; m++) {
 					//높이 이하면 0으로 저장
-					if(map[n][m] <= h) {
+					if(graph[n][m] <= h) {
 						map[n][m] = 0; 
 					} 
 					//아닌경우 1로 저장 
 					else map[n][m] = 1; 
 				}
 			}
-			
+
 			for (int i = 0; i < N; i++) {
 				for (int j = 0; j < N; j++) {
-					if(graph[i][j] == 1 && !visited[i][j]) {
+					if(map[i][j] == 1 && !visited[i][j]) {
 						DFS(i, j);
 						cnt++;
 					}
@@ -76,7 +80,6 @@ public class B_2468 {
 			}
 			max = Math.max(max, cnt); //둘 중 큰 수를 저장 
 		}
-
 		bw.write(max + "");
 		bw.flush();
 		bw.close();
