@@ -18,6 +18,23 @@ public class B2468 {
 
 	static void BFS(int x, int y) { 
 		Queue<int[]> q = new LinkedList<>();
+		q.offer(new int[] {x, y});
+		
+		while(!q.isEmpty()) {
+			int point[] = q.poll();
+			
+			for (int i = 0; i < 4; i++) {
+				int nx = point[0] + dx[i];
+				int ny = point[1] + dy[i];
+				
+				if(nx >= 0 && ny >= 0 && nx < N && ny < N) {
+					if(!visited[nx][ny] && graph[nx][ny] == 1) {
+						q.offer(new int[] {nx, ny});
+						visited[nx][ny] = true;
+					}
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
