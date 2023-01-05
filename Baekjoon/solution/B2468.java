@@ -12,6 +12,7 @@ public class B2468 {
 
 	static int N; 
 	static int[][] graph; //2차원 배열 지도
+	static int[][] map; //변형 된 지도 
 	static boolean[][] visited;
 	static int dx[] = {1, 0, -1, 0};
 	static int dy[] = {0, -1, 0, 1};
@@ -19,16 +20,16 @@ public class B2468 {
 	static void BFS(int x, int y) { 
 		Queue<int[]> q = new LinkedList<>();
 		q.offer(new int[] {x, y});
-		
+
 		while(!q.isEmpty()) {
 			int point[] = q.poll();
-			
+
 			for (int i = 0; i < 4; i++) {
 				int nx = point[0] + dx[i];
 				int ny = point[1] + dy[i];
-				
+
 				if(nx >= 0 && ny >= 0 && nx < N && ny < N) {
-					if(!visited[nx][ny] && graph[nx][ny] == 1) {
+					if(!visited[nx][ny] && map[nx][ny] == 1) {
 						q.offer(new int[] {nx, ny});
 						visited[nx][ny] = true;
 					}
@@ -55,6 +56,36 @@ public class B2468 {
 			}
 		}
 
+		int max = 1;
+
+		for (int h = 1; h < 101; h++) {
+			map = new int[N][N];
+			visited = new boolean[N][N];
+
+			int cnt = 0; //안전 지역 개수 
+
+			for (int n = 0; n < N; n++) {
+				for (int m = 0; m < N; m++) {
+					//높이 이하면 0으로 저장
+					if(graph[n][m] <= h) {
+						map[n][m] = 0; 
+					} 
+					//아닌경우 1로 저장 
+					else map[n][m] = 1; 
+				}
+			}
+
+			for (int i = 0; i < N; i++) {
+				for (int j = 0; j < N; j++) {
+					if(map[i][j] == 1 && !visited[i][j]) {
+						BFS(i, j);
+						cnt++;
+					}
+				}
+			}
+			max = Math.max(max, cnt); //둘 중 큰 수를 저장 
+		}
+		bw.write(max + "");
 		bw.flush();
 		bw.close();
 	}
