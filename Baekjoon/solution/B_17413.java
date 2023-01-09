@@ -39,7 +39,7 @@ public class B_17413 {
 				bw.write(S.charAt(i));
 			}
 			//괄호 밖에 있는 경우 
-			else {
+			else if(!check) {
 				//공백일 때 전부 pop 한다 
 				if(S.charAt(i) == ' ') {
 					while(!stack.isEmpty()) {
