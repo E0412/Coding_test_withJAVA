@@ -15,13 +15,26 @@ public class B_3986 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine());
-		Stack<String> s = new Stack<>();
+		int cnt = 0; //좋은 단어의 개수 
+		Stack<Character> s = new Stack<>();
+		String in = "";
 		
 		for (int i = 0; i < N; i++) {
-			String in = br.readLine();
-			s.push(in);
+			in = br.readLine();
 		}
 		
+		s.push(in.charAt(0));
+		for (int i = 1; i < in.length(); i++) {
+			if(s.size() > 0 && s.peek() == in.charAt(i)) {
+				s.pop();
+			} else {
+				s.push(in.charAt(i));
+			}
+		}
+		if(s.isEmpty()) {
+			cnt++;
+			bw.write(cnt + "");
+		}
 		bw.flush();
 		bw.close();
 	}
