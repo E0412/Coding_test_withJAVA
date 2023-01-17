@@ -17,15 +17,23 @@ public class B_11899 {
 		int cnt = 0;
 		Stack<Character> s = new Stack<>();
 
-		for (int i = 1; i <= 50; i++) {
-			s.push(in.charAt(i));
+		for (int i = 0; i < in.length(); i++) {
+			char ch = in.charAt(i);
 			
-			if(s.peek() == '(') {
-				
+			//여는 괄호인 경우 스택에 추가
+			if(ch == '(') {
+				s.push(ch);
+			} 
+			//그 외의 경우 
+			else {
+				if(s.empty()) {
+					cnt++;
+				} else {
+					s.pop();
+				}
 			}
-			
 		}
-		
+		cnt += s.size();
 		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
