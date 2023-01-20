@@ -15,11 +15,29 @@ public class B_18115 {
 
 		int N = Integer.parseInt(br.readLine());
 
+		ArrayList<Integer> list = new ArrayList<>();
+		Deque<Integer> dq = new LinkedList<>(); //양방향으로 처리
+		
 		for (int i = 0; i < N; i++) {
-			Deque<Integer> dq = new LinkedList<>();
-			dq.add(i);
+			st = new StringTokenizer(br.readLine(), " ");
+			list.add(Integer.parseInt(st.nextToken()));
 		}
-
+		//뒤에서부터 사용
+		Collections.reverse(list);
+		
+		for (int i = 0; i < N; i++) {
+			int p = list.get(i);
+			
+			if(p == 1) {
+				dq.addFirst(i + 1); //숫자를 앞에 저장 
+			} else if(p== 2) {
+				//앞에 저장된 숫자를 제거 후 저장한다
+				int tmp = dq.removeLast();
+				dq.addFirst(i + 1); 
+				dq.addFirst(tmp);
+			} 
+		}
+		
 		bw.flush();
 		bw.close();
 	}
