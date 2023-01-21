@@ -35,7 +35,13 @@ public class B_18115 {
 				int tmp = dq.removeLast();
 				dq.addFirst(i + 1); 
 				dq.addFirst(tmp);
-			} 
+			} else { //숫자를 뒤에서 추가 
+				dq.addLast(i + 1);
+			}
+		}
+		
+		while(!dq.isEmpty()) {
+			bw.write(dq.remove().toString() + " ");
 		}
 		
 		bw.flush();
