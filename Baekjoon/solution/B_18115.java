@@ -17,33 +17,33 @@ public class B_18115 {
 
 		ArrayList<Integer> list = new ArrayList<>();
 		Deque<Integer> dq = new LinkedList<>(); //양방향으로 처리
-		
+
+		st = new StringTokenizer(br.readLine(), " ");
 		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
 			list.add(Integer.parseInt(st.nextToken()));
 		}
+
 		//뒤에서부터 사용
 		Collections.reverse(list);
-		
+
 		for (int i = 0; i < N; i++) {
 			int p = list.get(i);
-			
+
 			if(p == 1) {
 				dq.addFirst(i + 1); //숫자를 앞에 저장 
 			} else if(p== 2) {
 				//앞에 저장된 숫자를 제거 후 저장한다
-				int tmp = dq.removeLast();
+				int tmp = dq.remove();
 				dq.addFirst(i + 1); 
 				dq.addFirst(tmp);
 			} else { //숫자를 뒤에서 추가 
 				dq.addLast(i + 1);
 			}
 		}
-		
+
 		while(!dq.isEmpty()) {
-			bw.write(dq.remove().toString() + " ");
+			bw.write(dq.remove() + " ");
 		}
-		
 		bw.flush();
 		bw.close();
 	}
