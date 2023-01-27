@@ -8,16 +8,24 @@ public class B_20301 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-		int N = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
 
-		int[][] arr = new int[N][N];
+		Deque<Integer> dq = new ArrayDeque<Integer>();
 
 		for (int i = 0; i < N; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			int n = Integer.parseInt(st.nextToken());
-			int m = Integer.parseInt(st.nextToken());
+			dq.add(i);
 
+			int cnt = 0;
+			int ch = 0; //방향을 바꾸면 1 추가 
+			boolean change = true; //방향이 바뀔 때 
+
+			while(!dq.isEmpty()) {
+
+			}
 		}
 
 		bw.flush();
