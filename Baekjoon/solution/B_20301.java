@@ -20,14 +20,37 @@ public class B_20301 {
 			dq.add(i);
 
 			int cnt = 0;
-			int ch = 0; //방향을 바꾸면 1 추가 
+			int chcnt = 0; //방향을 바꾸면 1 추가 
 			boolean change = true; //방향이 바뀔 때 
 
 			while(!dq.isEmpty()) {
+				int num;
+				//방향을 바꾸는 경우
+				if(change) {
+					num = dq.pollFirst();
+				} else {
+					num = dq.pollLast();
+				}
+				cnt++;
 
+				if(cnt == a) {
+					cnt = 0;
+					chcnt++;
+					bw.write(num + "\n");
+				} else {
+					if(change) {
+						dq.addLast(num);
+					} else {
+						dq.addFirst(num);
+					}
+				}
+
+				if(chcnt == b) {
+					chcnt = 0;
+					change = false;
+				}
 			}
 		}
-
 		bw.flush();
 		bw.close();
 	}
