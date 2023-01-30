@@ -16,39 +16,38 @@ public class B_20301 {
 
 		Deque<Integer> dq = new ArrayDeque<Integer>();
 
-		for (int i = 0; i < N; i++) {
+		for (int i = 1; i <= N; i++) 
 			dq.add(i);
 
-			int cnt = 0;
-			int chcnt = 0; //방향을 바꾸면 1 추가 
-			boolean change = true; //방향이 바뀔 때 
+		int cnt = 0;
+		int chcnt = 0; //방향을 바꾸면 1 추가 
+		boolean change = true; //방향이 바뀔 때 
 
-			while(!dq.isEmpty()) {
-				int num;
-				//방향을 바꾸는 경우
+		while(!dq.isEmpty()) {
+			int num;
+			//방향을 바꾸는 경우
+			if(change) {
+				num = dq.pollFirst();
+			} else {
+				num = dq.pollLast();
+			}
+			cnt++;
+
+			if(cnt == a) {
+				cnt = 0;
+				chcnt++;
+				bw.write(num + "\n");
+			} else {
 				if(change) {
-					num = dq.pollFirst();
+					dq.addLast(num);
 				} else {
-					num = dq.pollLast();
+					dq.addFirst(num);
 				}
-				cnt++;
+			}
 
-				if(cnt == a) {
-					cnt = 0;
-					chcnt++;
-					bw.write(num + "\n");
-				} else {
-					if(change) {
-						dq.addLast(num);
-					} else {
-						dq.addFirst(num);
-					}
-				}
-
-				if(chcnt == b) {
-					chcnt = 0;
-					change = false;
-				}
+			if(chcnt == b) {
+				chcnt = 0;
+				change = false;
 			}
 		}
 		bw.flush();
