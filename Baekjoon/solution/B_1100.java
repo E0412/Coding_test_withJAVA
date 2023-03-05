@@ -8,15 +8,26 @@ public class B_1100 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String[][] arr = new String[8][8];
+		String[] arr = new String[8];
 		int cnt = 0;
-		
-		for (int i = 0; i < arr.length; i++) {
-			String[] s = br.readLine().split("");
-			for (int j = 0; j < arr[0].length; j++) {
-				arr[i][j] = s[i]; 
+
+		for (int i = 0; i < 8; i++) { 
+			arr[i] = br.readLine();
+		}
+
+		for (int i = 0; i < 8; i++) {
+			for (int j = 0; j < 8; j++) {
+				//짝수번 줄, 짝수 번호인 경우 cnt++
+				if(i % 2 == 0 && j % 2 == 0 && arr[i].charAt(j) == 'F') {
+					cnt++;
+				} 
+				//홀수번 줄, 홀수 번호인 경우 cnt++
+				else if(i % 2 == 1 && j % 2 == 1 && arr[i].charAt(j) == 'F') {
+					cnt++;
+				}
 			}
 		}
+
 		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
