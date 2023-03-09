@@ -14,9 +14,33 @@ public class B_2740 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st  = new StringTokenizer(br.readLine());	
 
+		//A 행렬 입력
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 		
+		int[][] arrA = new int[N][M];
+		
+		for (int i = 0; i < N; i++) {
+			st  = new StringTokenizer(br.readLine());
+			for (int j = 0; j < M; j++) {
+				arrA[i][j] = Integer.parseInt(st.nextToken()); 
+			}
+		}
+		
+		//B 행렬 입력
+		st  = new StringTokenizer(br.readLine());
+		
+		M = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
+		
+		int[][] arrB = new int[M][K];
+		
+		for (int i = 0; i < M; i++) {
+			st  = new StringTokenizer(br.readLine());
+			for (int j = 0; j < K; j++) {
+				arrB[i][j] = Integer.parseInt(st.nextToken()); 
+			}
+		}
 		
 		bw.flush();
 		bw.close();
