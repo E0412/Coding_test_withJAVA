@@ -16,11 +16,20 @@ public class B_1927 {
 		int N = Integer.parseInt(br.readLine());
 
 		PriorityQueue<Integer> pq = new PriorityQueue<Integer>();
-		
+
 		for (int i = 0; i < N; i++) {
 			int input = Integer.parseInt(br.readLine());
+			if(input > 0) {
+				pq.add(input);
+			} else {
+				if(!pq.isEmpty()) {
+					bw.write(pq.poll() + "");
+				} else {
+					bw.write(0 + "");
+				}
+				bw.write("\n");
+			}
 		}
-
 		bw.flush();
 		bw.close();
 	}
