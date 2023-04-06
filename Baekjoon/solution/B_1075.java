@@ -13,13 +13,23 @@ public class B_1075 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine()); 
+		N = (N/100)*100; //맨 뒤 2자리를 없앤다 
 		int F = Integer.parseInt(br.readLine()); 
-		
+
 		int answer = 0;
-		
-		//N의 마지막 2자리를 임의로 바꿔서 N / F = 0 이 되게 해야한다 
-		
-		
+
+		//N의 마지막 2자리를 임의로 바꿔서 N % F = 0 이 되게 해야한다 
+		while(N % F != 0) { //나누어 떨어지지 않는 경우
+			N++;
+			answer++; //계속 더해준다 
+		}
+
+		if(answer < 10) { //결과값이 10보다 작으면 0을 붙여 출력
+			bw.write("0" + answer);
+		} else {
+			bw.write(answer + "");
+		}
+
 		bw.flush();
 		bw.close();
 	}
