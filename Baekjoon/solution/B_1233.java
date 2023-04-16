@@ -33,6 +33,18 @@ public class B_1233 {
 		}
 		
 		int answer = 0;
+		int[] cnt = new int[S1 * S2 * S3];
+		
+		//배열이 더해지는 값이 나타날 때마다 cnt 배열에 값을 추가한다 
+		for (int i = 0; i < s1.length; i++) {
+			for (int j = 0; j < s2.length; j++) {
+				for (int k = 0; k < s3.length; k++) {
+					cnt[s1[i] + s2[j] + s3[k]]++;
+				}
+			}
+		}
+		
+		//가장 많이 발생하는 합
 		
 		bw.flush();
 		bw.close();
