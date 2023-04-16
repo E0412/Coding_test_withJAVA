@@ -18,6 +18,20 @@ public class B_1233 {
 		int S2 = Integer.parseInt(st.nextToken());
 		int S3 = Integer.parseInt(st.nextToken());
 		
+		int[] s1 = new int[S1];
+		int[] s2 = new int[S2];
+		int[] s3 = new int[S3];
+		
+		for (int i = 0; i < s1.length; i++) {
+			s1[i] = i++;
+		}
+		for (int i = 0; i < s2.length; i++) {
+			s2[i] = i++;
+		}
+		for (int i = 0; i < s3.length; i++) {
+			s3[i] = i++;
+		}
+		
 		int answer = 0;
 		
 		bw.flush();
