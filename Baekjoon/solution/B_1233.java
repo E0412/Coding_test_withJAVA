@@ -17,11 +17,11 @@ public class B_1233 {
 		int S1 = Integer.parseInt(st.nextToken());
 		int S2 = Integer.parseInt(st.nextToken());
 		int S3 = Integer.parseInt(st.nextToken());
-		
+
 		int[] s1 = new int[S1];
 		int[] s2 = new int[S2];
 		int[] s3 = new int[S3];
-		
+
 		for (int i = 0; i < s1.length; i++) {
 			s1[i] = i++;
 		}
@@ -31,10 +31,10 @@ public class B_1233 {
 		for (int i = 0; i < s3.length; i++) {
 			s3[i] = i++;
 		}
-		
+
 		int answer = 0;
 		int[] cnt = new int[S1 * S2 * S3];
-		
+
 		//배열이 더해지는 값이 나타날 때마다 cnt 배열에 값을 추가한다 
 		for (int i = 0; i < s1.length; i++) {
 			for (int j = 0; j < s2.length; j++) {
@@ -43,9 +43,21 @@ public class B_1233 {
 				}
 			}
 		}
-		
+
+		int sum = 0;
 		//가장 많이 발생하는 합
-		
+		for (int i = 0; i < cnt.length; i++) {
+			sum = Math.max(sum, cnt[i]);
+		}
+
+		for (int i = 0; i < cnt.length; i++) {
+			if(sum == cnt[i]) {
+				answer = i;
+				break;
+			}
+		}
+
+		bw.write(answer + "");
 		bw.flush();
 		bw.close();
 	}
