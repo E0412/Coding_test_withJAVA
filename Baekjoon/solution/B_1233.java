@@ -22,14 +22,15 @@ public class B_1233 {
 		int[] s2 = new int[S2];
 		int[] s3 = new int[S3];
 
+		//i + 1로 수정
 		for (int i = 0; i < s1.length; i++) {
-			s1[i] = i++;
+			s1[i] = i + 1;
 		}
 		for (int i = 0; i < s2.length; i++) {
-			s2[i] = i++;
+			s2[i] = i + 1;
 		}
 		for (int i = 0; i < s3.length; i++) {
-			s3[i] = i++;
+			s3[i] = i + 1;
 		}
 
 		int answer = 0;
