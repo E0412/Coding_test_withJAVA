@@ -14,15 +14,40 @@ public class B_1236 {
 		int M = Integer.parseInt(st.nextToken());
 
 		int answer = 0;
-		
+
 		char[][] arr = new char[N][M];
 		for (int i = 0; i < N; i++) {
 			String input = br.readLine(); 
 			for (int j = 0; j < M; j++) {
-
+				arr[i][j] = input.charAt(j);
 			}
 		}
 
+		int row = 0; //경비원이 없는 행의 줄 수
+		int col = 0; //경비원이 없는 열의 줄 수 
+		boolean grd = false; //경비원이 없는 줄 체크
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				if(arr[i][j] == 'X') {
+					grd = true;
+					break;
+				}
+			}
+			if(grd = true) row++;
+		}
+
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				if(arr[i][j] == 'X') {
+					grd = true;
+					break;
+				}
+			}
+			if(grd = true) col++;
+		}
+
+		answer = Math.max(row, col);
 		bw.write(answer + "");
 		bw.flush();
 		bw.close();
