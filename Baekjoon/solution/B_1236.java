@@ -25,26 +25,28 @@ public class B_1236 {
 
 		int row = 0; //경비원이 없는 행의 줄 수
 		int col = 0; //경비원이 없는 열의 줄 수 
-		boolean grd = false; //경비원이 없는 줄 체크
+		boolean grd; //경비원이 없는 줄 체크
 
 		for (int i = 0; i < N; i++) {
+			grd = true;
 			for (int j = 0; j < M; j++) {
 				if(arr[i][j] == 'X') {
-					grd = true;
+					grd = false;
 					break;
 				}
 			}
-			if(grd = true) row++;
+			if(grd) row++;
 		}
 
 		for (int i = 0; i < N; i++) {
+			grd = true;
 			for (int j = 0; j < M; j++) {
 				if(arr[i][j] == 'X') {
-					grd = true;
+					grd = false;
 					break;
 				}
 			}
-			if(grd = true) col++;
+			if(grd) col++;
 		}
 
 		answer = Math.max(row, col);
