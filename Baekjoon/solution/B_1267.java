@@ -16,14 +16,31 @@ public class B_1267 {
 		StringTokenizer st;
 
 		int N = Integer.parseInt(br.readLine());
-		int[] time = new int[N]; //통화 시간
+		int time = 0; //통화 시간
+
+		int Y = 0; //영식 요금제
+		int M = 0; //민식 요금제
 
 		st  = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) { 
-			time[i] = Integer.parseInt(st.nextToken());
+			time = Integer.parseInt(st.nextToken());
+
+			Y += ((time / 30) + 1) * 10;
+			M += ((time / 60) + 1) * 15;
 		}
 
-		//영식은 Y 민식은 M으로 출력
+		//요금제가 같을 때
+		if (M == Y) {
+			bw.write("Y M " + Y);
+		} 
+		//영식 요금제의 합이 더 클 때 = 민식 요금제가 더 나은 요금제
+		else if (M < Y) {
+			bw.write("M " + M);
+		} 
+		//민식 요금제의 합이 더 큰 경우
+		else if (M > Y) {
+			bw.write("Y " + Y);
+		}
 
 		bw.flush();
 		bw.close();
