@@ -14,24 +14,29 @@ public class B_1284 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int cnt = 0;
-
-		for (int i = 1; i < 10000; i++) {
+		while(true) {
 			String input = br.readLine();
-			char ch = input.charAt(i);
 
-			if(ch == 1) {
-				cnt += 2;
+			if(input.equals("0")) break;
+
+			int cnt = 2; // 처음 앞 뒤 여백
+			cnt += input.length() - 1; //숫자 사이에 여백 + 1 추가 
+
+			for (int i = 0; i < input.length(); i++) {
+				char ch = input.charAt(i);
+
+				if(ch == '1') {
+					cnt += 2;
+				}
+				else if(ch == '0') {
+					cnt += 4;
+				}
+				else {
+					cnt += 3;
+				}
 			}
-			if(ch == 2) {
-				cnt += 3;
-			}
-			if(ch == 0) {
-				cnt += 4;
-			}
-			if(input == "0") break;
+			bw.write(cnt + "\n");
 		}
-		//각 입력마다 처리하는 것 추가하기
 
 		bw.flush();
 		bw.close();
