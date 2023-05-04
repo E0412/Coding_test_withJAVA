@@ -2,6 +2,7 @@ package solution;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Iterator;
 
 //단축키 지정
 public class B_1283 {
@@ -30,8 +31,32 @@ public class B_1283 {
 				bw.write("[" + ch + "]" + in.substring(in.indexOf(ch) + 1));
 				check = false; //중복처리
 			}
+			else {
+				bw.write(in + " ");
+			}
 		}
+		
+		if(!check) {
+			bw.write("\n");
+		}
+		else {
+			String out = "";
+			for (int i = 0; i < s.length(); i++) {
+				char ch = s.charAt(i);
+				char low = Character.toLowerCase(ch); //소문자로 변환
 
+				//단축키가 없는 경우
+				if(check && map.getOrDefault(low, 0) == 0 && low != ' ') {
+					map.put(low, 1);
+					out += "[" + ch + "]";
+					check = false; //중복처리
+				}
+				else {
+					out += ch;
+				}
+				bw.write(out + "\n");
+			}
+		}
 		bw.flush();
 		bw.close();
 	}
