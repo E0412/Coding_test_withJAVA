@@ -12,13 +12,42 @@ public class B_1331 {
 	//체스판 좌표
 	static int dx[] = {1, 2, 2, 1, -1, -2, -2, -1};
 	static int dy[] = {2, 1, -1, -2, -2, -1, 1, 2};
-
+	static int graph[][] = new int[6][6]; //체스판
+	static boolean visit;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		String start = br.readLine();
+
+		int x = start.charAt(0) - 'A';
+		int y = start.charAt(1) - '1';
+
+		graph[x][y] = 1; //그래프 할당
+
+		int cx = x; //현재 위치 저장
+		int cy = y;
+
+		for (int i = 1; i < 36; i++) {
+			String end = br.readLine();
+
+			int ex = end.charAt(0) - 'A';
+			int ey = end.charAt(1) - '1';
+
+			visit = false;
+
+			for (int j = 0; j < 8; j++) {
+				int nx = dx[j] + cx;
+				int ny = dy[j] + cy;
+
+				if(nx == ex && ny== ey && graph[nx][ny] == 0) {
+					graph[nx][ny] = 1; //방문처리
+					visit = true;
+					break;
+				}
+			}
+		}
 
 		bw.flush();
 		bw.close();
