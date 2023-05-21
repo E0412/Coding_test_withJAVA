@@ -41,12 +41,30 @@ public class B_1331 {
 				int nx = dx[j] + cx;
 				int ny = dy[j] + cy;
 
+				if(nx < 0 || nx >= 6 || ny < 0 || ny >= 6) continue;
+
 				if(nx == ex && ny== ey && graph[nx][ny] == 0) {
 					graph[nx][ny] = 1; //방문처리
 					visit = true;
 					break;
 				}
 			}
+			//방문한 경우 
+			if(visit) {
+				cx = ex; 
+				cy = ey;
+			} else {
+				bw.write("Invalid");
+				return;
+			}
+		}
+
+		visit = false;
+
+		if(visit) {
+			bw.write("Valid");
+		} else {
+			bw.write("Invalid");
 		}
 
 		bw.flush();
