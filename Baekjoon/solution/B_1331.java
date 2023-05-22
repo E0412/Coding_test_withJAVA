@@ -29,7 +29,7 @@ public class B_1331 {
 		int cx = x; //현재 위치 저장
 		int cy = y;
 
-		for (int i = 1; i < 36; i++) {
+		for (int i = 0; i < 35; i++) {
 			String end = br.readLine();
 
 			int ex = end.charAt(0) - 'A';
@@ -44,7 +44,7 @@ public class B_1331 {
 				if(nx < 0 || nx >= 6 || ny < 0 || ny >= 6) continue;
 
 				if(nx == ex && ny== ey && graph[nx][ny] == 0) {
-					graph[nx][ny] = 1; //방문처리
+					graph[ex][ey] = 1; //방문처리
 					visit = true;
 					break;
 				}
@@ -55,18 +55,25 @@ public class B_1331 {
 				cy = ey;
 			} else {
 				bw.write("Invalid");
+				bw.flush(); //버퍼를 저장하자마자 바로 출력한다 
 				return;
 			}
 		}
 
 		visit = false;
 
+		for (int i = 0; i < 8; i++) {
+			if((cx + dx[i]) == x && (cy + dy[i]) == y) {
+				visit = true;
+				break;
+			}
+		}
+
 		if(visit) {
 			bw.write("Valid");
 		} else {
 			bw.write("Invalid");
 		}
-
 		bw.flush();
 		bw.close();
 	}
