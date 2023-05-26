@@ -26,11 +26,9 @@ public class B_1357 {
 		int X = Integer.parseInt(st.nextToken());
 		int Y = Integer.parseInt(st.nextToken());
 
-		int revX = reverse(X);
-		int revY = reverse(Y);
-		int answer = revX + revY;
+		int answer = reverse(X) + reverse(Y);
 
-		bw.write(answer + ""); //테스트 미통과
+		bw.write(reverse(answer) + ""); //더한 값도 뒤집어야 한다
 		bw.flush();
 		bw.close();
 	}
