@@ -1,6 +1,7 @@
 package solution;
 
 import java.io.*;
+import java.util.ArrayList;
 
 //2진수 8진수
 public class B_1373 {
@@ -10,13 +11,29 @@ public class B_1373 {
 
 		String input = br.readLine();
 
-		//2진수를 10진수로 
-		int binaryToDec = Integer.parseInt(input, 2);
-
-		//10진수를 8진수로
-		String DecimalToOct = Integer.toOctalString(binaryToDec);
-
-		bw.write(DecimalToOct); //이클립스에서는 제대로 출력되지만 백준에서 런타임에러 발생
+		//세 자리씩 나누어 떨어지게 한다 
+		if(input.length() % 3 == 2) 
+			input = "0" + input; //2자리 수인 경우 한자리 추가
+		
+		if(input.length() % 3 == 1) 
+			input = "00" + input; //한자리 수인 경우 2자리 추가
+		
+		int a, b, c = 0;
+		
+		for (int i = input.length() - 1; i >= 0; i--) {
+			int num = input.charAt(i) - '0';
+			if (i % 3 == 2) 
+				a = num * 1;
+			
+			else if (i % 3 == 1) 
+				b = num * 2;
+			
+			else if (i % 3 == 0) {
+				c = num * 4;
+				
+			}
+		}
+		
 		bw.flush();
 		bw.close();
 	}
