@@ -10,7 +10,7 @@ import java.util.*;
  */
 public class B_1389 {
 
-	static final int tmp = -1;
+	static final int tmp = 12345678;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -23,8 +23,8 @@ public class B_1389 {
 
 
 		//초기값 설정
-		for (int i = 0; i <= N; i++) {
-			for (int j = 0; j <= N; j++) {
+		for (int i = 1; i <= N; i++) { // 1, <=
+			for (int j = 1; j <= N; j++) {
 				arr[i][j] = tmp;
 
 				if(i == j) {
@@ -43,11 +43,33 @@ public class B_1389 {
 			arr[x][y] = arr[y][x] = 1;  
 		}
 
+		for (int i = 1; i <= N; i++) {
+			for (int j = 1; j <= N; j++) {
+				for (int k = 1; k <= N; k++) {
+					//최단 경로 초기화
+					if(arr[j][k] > arr[j][i]+ arr[i][k]) {
+						arr[j][k] = arr[j][i]+ arr[i][k];
+					}
+				}
+			}
+		}
+
 		int result = tmp;
-		int lo = -1;
+		int person = -1;
 
 		//케빈 베이컨의 수가 가장 작은 인덱스 탐색
+		for (int i = 1; i <= N; i++) {
+			int cnt = 0;
+			for (int j = 1; j <= N; j++) {
+				cnt += arr[i][j];
+			}
+			if(result > cnt) {
+				result = cnt;
+				person = i;
+			}
+		}
 
+		bw.write(person + "\n");
 		bw.flush();
 		bw.close();
 	}
