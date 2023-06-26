@@ -12,45 +12,42 @@ public class B_1380 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int s_cnt = 1; //시나리오 번호
+		int s_cnt = 0; //시나리오 번호
 
 		while(true) {
-			String input = ""; //A 또는 B 입력
-
-			String g_cnt = br.readLine(); //압수당한 여학생 수 
-			int N = Integer.parseInt(g_cnt);
+			int N = Integer.parseInt(br.readLine());  
 
 			if(N == 0) {
-				break;
+				return; 
+			} else {
+				s_cnt++;
 			}
 
-			//이름 저장 배열
-			String[] name = new String[N];
+			ArrayList<String> name = new ArrayList<>(); //여학생 저장 리스트
+
+			//여학생 이름 입력
 			for (int i = 0; i < N; i++) {
-				name[i] = br.readLine();
+				name.add(br.readLine());
 			}
 
-			ArrayList<String> list = new ArrayList<>(); //번호를 입력받을 리스트
+			ArrayList<Integer> cnt = new ArrayList<>(); //숫자 저장 리스트
 
 			//여학생 번호와 'A'또는 'B' 입력 
 			for (int i = 0; i < 2*N - 1; i++) {
 				StringTokenizer st  = new StringTokenizer(br.readLine());
-				String num = st.nextToken();
-				
+				int num = Integer.parseInt(st.nextToken());
+
 				//번호가 겹치는 경우 삭제 
-				if(list.contains(num)) {
-					list.remove(num);
+				if(cnt.contains(num)) {
+					cnt.remove((Integer)num);
 				} else {
-					list.add(num);
+					cnt.add(num);
 				}
-				input = br.readLine();
 			}
 
-			Integer result = Integer.parseInt(list.get(0)) - 1;
-			bw.write(s_cnt + " " + name[result]);
+			int result = cnt.get(0);
+			bw.write(s_cnt + " " + name.get(result - 1) + "\n");
+			bw.flush();
 		}
-
-		bw.flush();
-		bw.close();
 	}
 }
