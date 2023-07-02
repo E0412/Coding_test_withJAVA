@@ -45,9 +45,19 @@ public class B_1384 {
 			}
 			//누가 누구에게 나쁜말을 했는지 출력
 			else {
-
+				for (int i = 0; i < N; i++) {
+					for (int j = 1; j < N; j++) {
+						if(name[i][j].equals("N")) {
+							if(i >= j) {
+								bw.write(name[i - j][0] + " was nasty about " + name[i][0] + "\n");
+							} else if(i < j) {
+								bw.write(name[N - (j - i)][0] + " was nasty about " + name[i][0] + "\n");
+							}
+						}
+					}
+				}
+				bw.write("\n"); //그룹을 공백으로 구분
 			}
-			bw.write("\n"); //그룹을 공백으로 구분
 		}
 		bw.flush();
 		bw.close();
