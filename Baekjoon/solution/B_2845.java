@@ -12,19 +12,18 @@ public class B_2845 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer st  = new StringTokenizer(br.readLine());	
-	
+
 		int L = Integer.parseInt(st.nextToken()); //1m^2당 사람의 수
 		int P = Integer.parseInt(st.nextToken()); //파티가 열렸던 곳의 넓이 
-		
-		int[] arr = new int[L];
-		
+
+		int[] arr = new int[5];
+
 		st  = new StringTokenizer(br.readLine());	
 		for (int i = 0; i < 5; i++) {
 			arr[i] = Integer.parseInt(st.nextToken()); //참가자의 수 
+			int answer = arr[i] - L * P;
+			bw.write(answer + " ");
 		}
-
-		//상근이가 계산한 참가자의 수와  각 기사에 적혀있는 참가자의 수의 차이 출력 
-		
 		bw.flush();
 		bw.close();
 	}
