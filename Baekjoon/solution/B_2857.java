@@ -11,15 +11,24 @@ public class B_2857 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		String name[] = new String[10];
+		String name[] = new String[5];
+		int cnt = 0;
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < name.length; i++) {
 			name[i] = br.readLine();
 		}
 
-		//요원이 없는 경우
-		bw.write("HE GOT AWAY!");  
+		for (int i = 0; i < name.length; i++) {
+			if(name[i].contains("FBI")) {
+				bw.write(i + 1 + " ");
+				cnt++;
+			}
+		}
 
+		//요원이 없는 경우
+		if(cnt == 0) {
+			bw.write("HE GOT AWAY!");  
+		}
 
 		bw.flush();
 		bw.close();
