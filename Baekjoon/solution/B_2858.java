@@ -17,11 +17,13 @@ public class B_2858 {
 		int L = 0; 
 		int W = 0;  
 
-		for (L = 1; L < R; L++) {
-			for (W = 1; W < R; W++) {
-				if((L * 2) + (W - 2) * 2 == R && (L - 2) * (W - 2) == B) {
-					bw.write(W + " " + L);
-					return;
+		for (L = 1; L < 10000; L++) {
+			if(B % L == 0) {
+				W = B / L;
+
+				if((L * 2) + (W * 2) + 4 == R) {
+					bw.write((W + 2) + " " + (L + 2));
+					break;
 				}
 			}
 		}
