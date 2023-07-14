@@ -10,21 +10,21 @@ public class B_1453 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine());
-		int[] arr = new int[N];
-		
+		boolean[] arr = new boolean[100]; //자릿수 100개로 고정
+
 		int cnt = 0; //거절당하는 사람의 수 
-		
+
 		StringTokenizer st  = new StringTokenizer(br.readLine());	
 		for (int i = 0; i < N; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
-			
-			if(arr[i] == arr[i + 1]) {
+			int m = Integer.parseInt(st.nextToken());
+
+			if(arr[m] == true) {
 				cnt++;
 			} else {
-				bw.write(cnt + "");
+				arr[m] = true;
 			}
 		}
-		
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
