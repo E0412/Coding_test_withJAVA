@@ -11,17 +11,31 @@ public class B_1522 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-	
+
 		String in = br.readLine();
-	
-		int cnt = 0; //a의 길이
-		
+
+		int a_num = 0; //a의 갯수
+
 		for (int i = 0; i < in.length(); i++) {
 			if(in.charAt(i) == 'a') {
-				cnt++;
+				a_num++;
 			}
 		}
-		
+
+		int cnt = 0; //교환 횟수
+		int answer = in.length();
+
+		for (int i = 0; i < in.length(); i++) {
+			cnt = 0; //초기화
+
+			for (int j = i; j < a_num + i; j++) {
+				if(in.charAt(j % in.length()) == 'b') {
+					cnt++;
+				}
+			}
+			answer = Math.min(answer, cnt);
+		}
+		bw.write(answer + "");
 		bw.flush();
 		bw.close();
 	}
