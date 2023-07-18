@@ -22,8 +22,19 @@ public class B_2897 {
 			}
 		}
 		
-		//아무차도 부수지 않으면서 주차할 수 있는 공간의 개수 
-
+		for (int i = 0; i < R - 1; i++) {
+			for (int j = 0; j < C - 1; j++) {
+				int cnt = 0; //공간의 개수 
+				
+				//#인 빌딩은 부술 수 없다
+				if(arr[i][j] == '#' || arr[i + 1][j] == '#' || arr[i][j + 1] == '#' || arr[i + 1][j + 1] == '#') 
+					continue;
+				//X의 개수만큼 카운트한다
+				if(arr[i][j] == 'X' || arr[i + 1][j] == 'X' || arr[i][j + 1] == 'X' || arr[i + 1][j + 1] == 'X') 
+					cnt++;
+			}
+		}
+		
 		bw.flush();
 		bw.close();
 	}
