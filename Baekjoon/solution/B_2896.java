@@ -22,8 +22,14 @@ public class B_2896 {
 			ratio[i] = Integer.parseInt(st.nextToken());
 		}
 
-		//칵테일을 최대한 만들었을 때 남는 주스의 양
+		int o = fruit[0] / ratio[0];
+		int a = fruit[1] / ratio[1];
+		int p = fruit[2] / ratio[2];
 		
+		int min = o < a ? o : a;
+		min = min < p ? min : p;
+		
+		bw.write((fruit[0] - min * ratio[0]) + " " + (fruit[1] - min * ratio[1]) + " " + (fruit[2] - min * ratio[2]));
 		bw.flush();
 		bw.close();
 	}
