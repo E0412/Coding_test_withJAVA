@@ -14,6 +14,7 @@ public class B_1544 {
 
 		int N = Integer.parseInt(br.readLine());
 		ArrayList<String>[] list = new ArrayList[N];
+		int cnt = 0; //서로 다른 단어의 개수 
 
 		for (int i = 0; i < N; i++) {
 			list[i] = new ArrayList<>();
@@ -21,8 +22,20 @@ public class B_1544 {
 			for (int j = 0; j < s.length(); j++) {
 				list[i].add(s.substring(j) + s.substring(0, j));
 			}
-		}
+			boolean check = true;
 
+			for (int n = 0; check && n <= i - 1; n++) {
+				for (int m = 0; check && m < list[n].size(); m++) { //동일한 단어 확인
+					if(s.equals(list[n].get(m))) {
+						check = false;
+					}
+				}
+			}
+			if(check) {
+				cnt++;
+			}
+		}
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
