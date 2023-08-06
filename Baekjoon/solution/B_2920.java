@@ -23,10 +23,13 @@ public class B_2920 {
 		boolean asc = true;
 		boolean des = true;
 		
-		for (int i = 0; i < arr.length; i++) {
-			//연주 순서
+		//연주 순서
+		for (int i = 0; i < arr.length - 1; i++) {
+			//다음 숫자가 더 큰 경우 내림차순 불가
+			if(arr[i] < arr[i + 1]) des = false; 
+			//다음 숫자가 작은 경우 오름차순 불가
+			if(arr[i] > arr[i + 1]) asc = false; 
 		}
-		
 		if(asc) {
 			bw.write("ascending");
 		} else if(des) {
