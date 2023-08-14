@@ -22,17 +22,16 @@ public class B_2947 {
 		for (int i = 0; i < arr.length; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
-
 		//정렬
 		for (int i = 0; i < 5; i++) {
 			for (int j = 0; j < 4; j++) {
-
 				//조각의 수가 다음 조각보다 큰 경우 서로 위치 변경
 				if(arr[j] > arr[j + 1]) {
 					int temp = arr[j];
 					arr[j] = arr[j + 1];
 					arr[j + 1] = temp;
-
+					
+					//출력
 					for (int k = 0; k < arr.length; k++) {
 						bw.write(arr[k] + " ");
 					}
