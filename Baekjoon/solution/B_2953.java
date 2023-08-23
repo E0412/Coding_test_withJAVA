@@ -21,14 +21,19 @@ public class B_2953 {
 		int num = 0; //참가자 번호
 
 		for (int i = 0; i < 5; i++) {
+			st  = new StringTokenizer(br.readLine());	
 			for (int j = 0; j < 4; j++) {
-				st  = new StringTokenizer(br.readLine());	
 				arr[i][j] = Integer.parseInt(st.nextToken());
 				total += arr[i][j]; //점수의 합 저장
 			}
+			//최대 점수
+			if(total > max) {
+				num = i++;
+				max = total;
+			}
+			total = 0;
 		}
-
-
+		bw.write(num + " " + max);
 		bw.flush();
 		bw.close();
 	}
