@@ -13,14 +13,14 @@ public class B_1668 {
 
 		int N = Integer.parseInt(br.readLine()); 
 		int[] arr = new int[N];
-		
+
 		int cnt = 0; //보이는 트로피의 개수
 		int h = 0; //높이 
-		
-		//왼쪽에서 트로피 보이는 개수 
+
+		//왼쪽에서 보이는 트로피 개수 
 		for (int i = 0; i < N; i++) {
 			arr[i] = Integer.parseInt(br.readLine());
-			
+
 			if(i == 0) {
 				h = arr[i];
 				cnt++;
@@ -30,9 +30,19 @@ public class B_1668 {
 				cnt++;
 			}
 		}
-		
-		//오른쪽에서 트로피 보이는 개수 
-		
+		bw.write(cnt + "\n");
+
+		//오른쪽에서 보이는 트로피 개수 
+		cnt = 1; //초기화
+		h = arr[N - 1];
+		for (int i = N - 2; i >= 0; i--) {
+			if(h < arr[i]) {
+				h = arr[i];
+				cnt++;
+			}
+		}
+
+		bw.write(cnt + "\n");
 		bw.flush();
 		bw.close();
 	}
