@@ -26,27 +26,27 @@ public class B_3028 {
 					po[0] = true;
 					po[1] = false;
 				}
+			} //괄호 위치 수정
 
-				//2번 3번 위치를 교환하는 경우
-				else if(input.charAt(i) == 'B') {	
-					if(po[1] == true) {
-						po[1] = false;
-						po[2] = true;
-					} else if(po[2] == true) {
-						po[1] = true;
-						po[2] = false;
-					}
+			//2번 3번 위치를 교환하는 경우
+			else if(input.charAt(i) == 'B') {	
+				if(po[1] == true) {
+					po[1] = false;
+					po[2] = true;
+				} else if(po[2] == true) {
+					po[1] = true;
+					po[2] = false;
 				}
+			}
 
-				//1번 3번 위치를 교환하는 경우
-				else if(input.charAt(i) == 'C') {
-					if(po[0] == true) {
-						po[0] = false;
-						po[2] = true;
-					} else if(po[2] == true) {
-						po[0] = true;
-						po[2] = false;
-					}
+			//1번 3번 위치를 교환하는 경우
+			else if(input.charAt(i) == 'C') {
+				if(po[0] == true) {
+					po[0] = false;
+					po[2] = true;
+				} else if(po[2] == true) {
+					po[0] = true;
+					po[2] = false;
 				}
 			}
 		}
