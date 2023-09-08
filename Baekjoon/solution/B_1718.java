@@ -26,7 +26,23 @@ public class B_1718 {
 			b.add(key.charAt(i));
 		}
 		
+		char[] code = new char[sen.length()];
 		
+		for (int i = 0; i < code.length; i++) {
+			code[i] = a.get(i); //평문 저장 
+		}
+		
+		for (int i = 0; i < a.size(); i++) {
+			//평문이 암호화 키보다 긴 경우
+			if(a.size() > b.size()) {
+				b.add(b.get(i));
+			}
+			
+		}
+		
+		for(char answer : code) {
+			bw.write(answer + "");
+		}
 		bw.flush();
 		bw.close();
 	}
