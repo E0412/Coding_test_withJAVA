@@ -27,12 +27,41 @@ public class B_1991 {
 
 	//트리 생성
 	static void insertNode(Node root, char mid, char left, char right) {
-
+		//루트 노드인지 확인
+		if(root.input == 'A') {
+			//자식노드가 '.'이면 null
+			if(left == '.') {
+				root.left = null;
+			} 
+			//그 외엔 새로운 노드 생성
+			else {
+				root.left = new Node(left, null, null);
+			}
+			if(right == '.') {
+				root.right = null;
+			} else {
+				root.right = new Node(right, null, null);
+			}
+		} else {
+			if(root.left != null) insertNode(root.left, mid, left, right);
+			if(root.right != null) insertNode(root.right, mid, left, right);
+		}
 	}
 
 	//전위 순회(preorder traversal)
+	static void preorder(Node in) {
+
+	}
+
 	//중위 순회(inorder traversal)
+	static void inorder(Node in) {
+
+	}
+
 	//후위 순회(postorder traversal)
+	static void postorder(Node in) {
+
+	}
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -49,6 +78,5 @@ public class B_1991 {
 
 			insertNode(root, mid, left, right);
 		}
-
 	}
 }
