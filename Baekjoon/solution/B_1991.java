@@ -28,7 +28,7 @@ public class B_1991 {
 	//트리 생성
 	static void insertNode(Node root, char mid, char left, char right) {
 		//루트 노드인지 확인
-		if(root.input == 'A') {
+		if(root.input == mid) {
 			//자식노드가 '.'이면 null
 			if(left == '.') {
 				root.left = null;
@@ -49,18 +49,27 @@ public class B_1991 {
 	}
 
 	//전위 순회(preorder traversal)
-	static void preorder(Node in) {
-
+	static void preorder(Node in) throws IOException {
+		if(in == null) return;
+		bw.write(in.input);
+		preorder(in.left);
+		preorder(in.right);
 	}
 
 	//중위 순회(inorder traversal)
-	static void inorder(Node in) {
-
+	static void inorder(Node in) throws IOException {
+		if(in == null) return;
+		inorder(in.left);
+		bw.write(in.input);
+		inorder(in.right);
 	}
 
 	//후위 순회(postorder traversal)
-	static void postorder(Node in) {
-
+	static void postorder(Node in) throws IOException {
+		if(in == null) return;
+		postorder(in.left);
+		postorder(in.right);
+		bw.write(in.input);
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -78,5 +87,17 @@ public class B_1991 {
 
 			insertNode(root, mid, left, right);
 		}
+
+		preorder(root);
+		bw.write("\n");
+
+		inorder(root);
+		bw.write("\n");
+
+		postorder(root);
+		bw.write("\n");
+
+		bw.flush();
+		bw.close();
 	}
 }
