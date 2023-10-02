@@ -22,17 +22,40 @@ public class B_1864 {
 			}
 
 			int sum = 0;
-			/*
-			 -는 0에 대응한다.
-			\는 1에 대응한다.
-			(는 2에 대응한다.
-			@는 3에 대응한다.
-			?는 4에 대응한다.
-			>는 5에 대응한다.
-			&는 6에 대응한다.
-			%는 7에 대응한다.
-			/는 -1에 대응한다.
-			 */
+			for (int i = 0; i < list.size(); i++) {
+				switch (list.get(i)) {
+				case '-':
+					sum += 0;
+					break;
+				case '(':
+					sum += 2 * Math.pow(8, i); //8의 i제곱
+					break;
+				case '@':
+					sum += 3 * Math.pow(8, i); //8의 i제곱
+					break;
+				case '?':
+					sum += 4 * Math.pow(8, i); //8의 i제곱
+					break;
+				case '>':
+					sum += 5 * Math.pow(8, i); //8의 i제곱
+					break;
+				case '&':
+					sum += 6 * Math.pow(8, i); //8의 i제곱
+					break;
+				case '%':
+					sum += 7 * Math.pow(8, i); //8의 i제곱
+					break;
+				case '/':
+					sum += -1 * Math.pow(8, i); //8의 i제곱
+					break;
+				// '\'가 불가능하여 디폴트값으로 설정
+				default:
+					sum += 1 * Math.pow(8, i);
+					break;
+				}
+			}
+			bw.write(sum + "\n");
+			bw.flush();
 		}
 	}
 }
