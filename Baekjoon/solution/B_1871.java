@@ -15,10 +15,15 @@ public class B_1871 {
 			String in = br.readLine();
 			StringTokenizer st  = new StringTokenizer(in, "-");	
 
-			String fst = st.nextToken(); //첫번째 번호판
-			String snd = st.nextToken(); //두번째 번호판
-			int cnt = 0;
-			int sum = 0;
+			String a = st.nextToken(); //첫번째 번호판
+			String b = st.nextToken(); //두번째 번호판
+			int a_num = 0;
+			for (int j = 0; j < a.length(); j++) {
+				int sum = a.charAt(j) - 97;
+				sum *= Math.pow(26, 2 - j);
+				a_num += sum;
+			}
+			int b_num = 0;
 			//좋은 번호판이면 "nice"를, 아니면 "not nice"를 출력
 		}
 
