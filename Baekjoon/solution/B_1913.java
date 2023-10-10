@@ -48,8 +48,20 @@ public class B_1913 {
 
 		search();
 
-		//찾아야 하는 좌표 변수
+		int row = 0;
+		int col = 0;
 
+		//찾아야 하는 좌표 변수
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				if(graph[i][j] == M) {
+					row = i + 1;
+					col = j + 1;
+				}
+				bw.write(graph[i][j] + " ");
+			} bw.write("\n");
+		}
+		bw.write(row + " " + col + "\n"); 
 		bw.flush();
 		bw.close();
 	}
