@@ -48,10 +48,19 @@ public class B_1996 {
 							cnt += (tmp[nx][ny] - '0'); //지뢰 추가
 						}
 					}
+					//지뢰의 수가 10을 초과하는 경우
+					if(cnt >= 10) map[x][y] = 'M';
+					else map[x][y] = (char) (cnt + '0'); //지뢰의 수 입력 
 				}
 			}
 		}
 
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < N; j++) {
+				bw.write(map[i][j]);
+			}
+			bw.write("\n");
+		}
 		bw.flush();
 		bw.close();
 	}
