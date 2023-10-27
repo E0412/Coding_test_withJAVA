@@ -18,9 +18,22 @@ public class B_3184 {
 	static boolean[][] visited;
 
 	static void DFS(int x, int y) {
-		
+		if(graph[x][y] == 'o') O++; //양
+		if(graph[x][y] == 'v') V++; //늑대
+
+		graph[x][y] = '#';
+
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			//범위를 벗어나거나 울타리가 있는 경우
+			if(nx < 0 || nx >= R || ny < 0 || ny >= C) continue;
+			if(graph[nx][ny] == '#') continue;
+			DFS(nx, ny);
+		}
 	}
-	
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -54,7 +67,7 @@ public class B_3184 {
 				else wolf += V;
 			}
 		}
-
+		bw.write(sheep + " " + wolf);
 		bw.flush();
 		bw.close();
 	}
