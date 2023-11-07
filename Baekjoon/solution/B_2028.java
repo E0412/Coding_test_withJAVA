@@ -11,17 +11,26 @@ public class B_2028 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
+
 		int T = Integer.parseInt(br.readLine());
-		
+
 		while(T-- > 0) {
 			int N = Integer.parseInt(br.readLine());
 			int pow = N * N;
-			
+
 			boolean chk = true;
 			//자기복제수인지 확인
+			while(N > 0) {
+				if(N % 10 != pow % 10) chk = false;
+				N /= 10; 
+				pow /= 10;
+			}
+			if(chk) {
+				bw.write("YES\n");
+			} else {
+				bw.write("NO\n");
+			}
 		}
-		
 		bw.flush();
 		bw.close();
 	}
