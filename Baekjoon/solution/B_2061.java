@@ -2,6 +2,7 @@ package solution;
 
 import java.io.*;
 import java.math.BigInteger;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
 //좋은 암호
@@ -24,8 +25,20 @@ public class B_2061 {
 		for (int i = 2; i < L; i++) { //2 ≤ L ≤ 1,000,000
 			if(check[i]) continue; //소수가 아닌경우 continue
 			//좋은 암호인 경우 GOOD, 아닌경우 BAD 출력
-		}
+			BigInteger n = new BigInteger(Integer.toString(i));
 
+			//좋은 암호가 아닌 경우 
+			if(K.mod(n).compareTo(BigInteger.ZERO) == 0) {
+				bw.write("BAD " + n);
+				bw.flush();
+				return; 
+			}
+			//좋은 암호인 경우(i를 제외한 i의 배수 확인)
+			for (int j = i + i; j <= L; j += i) {
+				check[j] = true;
+			}
+		}
+		bw.write("GOOD");
 		bw.flush();
 		bw.close();
 	}
