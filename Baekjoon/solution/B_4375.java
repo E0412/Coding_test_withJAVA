@@ -10,22 +10,21 @@ public class B_4375 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
+
 		String in;
 		while((in = br.readLine()) != null) {
 			int N = Integer.parseInt(in);
-			int num = 0;
+			int cnt = 1;
+			int answer = 1;
 
-			for (int i = 1; i <= N; i++) {
-				num = (num * 10 + 1) % N;
-				
-				if(num == 0) {
-					bw.write(i + "");
-					bw.flush();
-					break;
-				}
+			//분배법칙 활용
+			while((cnt = cnt % N) != 0) {
+				answer++;
+				cnt = cnt * 10 + 1;
 			}
+			bw.write(answer + "\n");
 		}
+		bw.flush();
 		br.close();
 		bw.close();
 	}
