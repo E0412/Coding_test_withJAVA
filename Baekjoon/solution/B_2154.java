@@ -12,16 +12,17 @@ public class B_2154 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int N = Integer.parseInt(br.readLine());
-		String[] arr = new String[N + 1];
-		int now = 0; //위치
+		StringBuilder sb = new StringBuilder();
 
+		//배열로는 연속하는 순서를 찾기 어려움 -> StringBuilder 사용
 		for (int i = 1; i <= N; i++) {
-			arr[i] = String.valueOf(i); //숫자 저장
+			sb.append(i); //숫자 저장
 		}
 
-		//N이 등장하는 위치를 찾아야함
-		//배열 말고 다른거 찾아보기
+		//N이 등장하는 위치
+		int answer = sb.toString().indexOf(String.valueOf(N)) + 1;
 
+		bw.write(answer + "");
 		bw.flush();
 		bw.close();
 	}
