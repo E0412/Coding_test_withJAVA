@@ -24,8 +24,28 @@ public class B_2160 {
 				}
 			}
 		}
+
+		int num = 0;
+		int min = Integer.MAX_VALUE;
+		int x = 0, y = 0;
+
 		//그림 비교
-		
+		for (int i = 0; i < N; i++) {
+			for (int j = i + 1; j < N; j++) {
+				num = 0;
+
+				for (int nx = 0; nx < 5; nx++) {
+					for (int ny = 0; ny < 7; ny++) {
+						//그림이 다른 경우
+						if(map[i][nx][ny] != map[j][nx][ny]) {
+
+							num++;
+						}
+					}
+				}
+			}
+		}
+
 		bw.flush();
 		bw.close();
 	}
