@@ -38,14 +38,18 @@ public class B_2160 {
 					for (int ny = 0; ny < 7; ny++) {
 						//그림이 다른 경우
 						if(map[i][nx][ny] != map[j][nx][ny]) {
-
 							num++;
 						}
 					}
 				}
+				if(num < min) {
+					min = num;
+					x = i + 1;
+					y = j + 1;
+				}
 			}
 		}
-
+		bw.write(String.valueOf(x + " " + y));
 		bw.flush();
 		bw.close();
 	}
