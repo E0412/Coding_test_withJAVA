@@ -29,8 +29,16 @@ public class B_2167 {
 			int j = Integer.parseInt(st.nextToken());
 			int x = Integer.parseInt(st.nextToken());
 			int y = Integer.parseInt(st.nextToken());
-		}
 
+			int sum = 0;
+
+			for (int nx = i; nx <= x; nx++) {
+				for (int ny = j; ny <= y; ny++) {
+					sum += arr[nx][ny];
+				}
+			}
+			bw.write(sum + "\n");
+		}
 		bw.flush();
 		bw.close();
 	}
