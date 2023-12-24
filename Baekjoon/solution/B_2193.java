@@ -18,7 +18,10 @@ public class B_2193 {
 		cnt[1] = 1;
 
 		//N자리 이친수의 개수 
-
+		for (int i = 2; i <= N; i++) {
+			cnt[i] = cnt[i - 1] + cnt[i - 2];
+		}
+		bw.write(cnt[N] + "");
 		bw.flush();
 		bw.close();
 	}
