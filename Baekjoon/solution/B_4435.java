@@ -23,6 +23,16 @@ public class B_4435 {
 					n++;
 				}
 			}
+			bw.write("Battle " + i + ": ");
+			if(group[0] > group[1]) { //간달프의 군대가 이기는 경우
+				bw.write("Good triumphs over Evil\n");
+			} else if(group[0] < group[1]) { //사우론의 군대가 이기는 경우
+				bw.write("Evil eradicates all trace of Good\n");
+			} else { //합이 같아 비긴 경우
+				bw.write("No victor on this battle field\n");
+			}
 		}
+		bw.flush();
+		bw.close();
 	}
 }
