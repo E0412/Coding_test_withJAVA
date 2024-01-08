@@ -18,7 +18,14 @@ public class B_2161 {
 		}
 
 		//버린 카드 출력
+		while(q.size() != 1) {
+			int card = q.poll(); //버리는 카드
+			bw.write(card + " ");
 
+			int last = q.poll(); //마지막에 남는 카드
+			q.offer(last);
+		}
+		bw.write(q.poll() + "");
 		bw.flush();
 		bw.close();
 	}
