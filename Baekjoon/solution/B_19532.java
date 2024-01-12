@@ -20,9 +20,14 @@ public class B_19532 {
 		for (int x = -999; x <= 999; x++) {
 			for (int y = -999; y <= 999; y++) {
 				//연립방정식 사용
+				if(a * x + b * y == c) {
+					if(d * x + e * y == f) {
+						bw.write(x + " " + y + "\n");
+						break;
+					}
+				}
 			}
 		}
-
 		bw.flush();
 		bw.close();
 	}
