@@ -24,7 +24,13 @@ public class B_4447 {
 				}
 			}
 			// 'g'와 'b'의 개수에 따라 “GOOD”, “A BADDY”, “NEUTRAL”  중 하나를 출력
-
+			if(G == B) {
+				bw.write(hero + " is NEUTRAL\n");
+			} else if(G < B) {
+				bw.write(hero + " is A BADDY\n");
+			} else {
+				bw.write(hero + " is GOOD\n");
+			}
 		}
 		bw.flush();
 		bw.close();
