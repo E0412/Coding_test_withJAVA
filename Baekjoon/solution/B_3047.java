@@ -26,9 +26,9 @@ public class B_3047 {
 		for (int i = 0; i < arr.length; i++) {
 			if(in.charAt(i) == 'A') {
 				bw.write(arr[0] + " ");
-			} else 	if(in.charAt(i) == 'B') {
+			} else if(in.charAt(i) == 'B') {
 				bw.write(arr[1] + " ");
-			} else 	if(in.charAt(i) == 'C') {
+			} else if(in.charAt(i) == 'C') {
 				bw.write(arr[2] + " ");
 			}
 		}
