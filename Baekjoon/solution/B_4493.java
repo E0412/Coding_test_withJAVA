@@ -32,6 +32,13 @@ public class B_4493 {
 				}
 			}
 			//cnt가 양수이면 p1이 승자, 음수이면 p2가 승자 
+			if(cnt > 0) {
+				bw.write("Player 1\n");
+			} else if(cnt < 0) {
+				bw.write("Player 2\n");
+			} else {
+				bw.write("TIE\n");
+			}
 		}
 		bw.flush();
 		bw.close();
