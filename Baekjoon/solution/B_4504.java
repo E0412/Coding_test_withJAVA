@@ -7,10 +7,11 @@ public class B_4504 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		
+
 		int N = Integer.parseInt(br.readLine());
-		
-		for (int i = 0; i < 6; i++) {
+
+		//첫 시도는 테스트 수를 제한해서 오답, 테스트 케이스의 수를 제한하지 않게 바꾸니 해결
+		while(true) {
 			int in = Integer.parseInt(br.readLine());
 
 			if(in == 0) break;
