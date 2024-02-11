@@ -22,7 +22,19 @@ public class B_1158 {
 		sb.append('<');
 
 		//요세푸스 순열 구하기
-
+		while(!q.isEmpty()) {
+			for (int i = 1; i <= K; i++) {
+				if(i == K) 
+					if(q.size() == 1) {
+						sb.append(q.poll());
+					} else {
+						sb.append(q.poll() + ", ");
+					}
+				else q.offer(q.poll());
+			} 
+		}
+		sb.append('>');
+		bw.write(sb.toString() + "\n");
 		bw.flush();
 		bw.close();
 	}
