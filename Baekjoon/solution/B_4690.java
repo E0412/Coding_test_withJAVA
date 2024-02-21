@@ -20,6 +20,9 @@ public class B_4690 {
 						int tb = b * b * b;
 						int tc = c * c * c;
 						int td = d * d * d;
+
+						if(ta == tb + tc + td)
+							bw.write("Cube = " + a + ", Triple = (" + b + "," + c + "," + d + ") \n");
 					}
 				}
 			}
