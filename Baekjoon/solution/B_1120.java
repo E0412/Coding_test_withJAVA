@@ -15,13 +15,17 @@ public class B_1120 {
 
 		int len = A.length();
 
-		for (int i = 0; i < B.length() - A.length(); i++) {
+		//B 문자열을 A 문자열만큼 반복
+		for (int i = 0; i <= B.length() - A.length(); i++) {
 			int cnt = 0;
-			for (int j = 0; j < len; j++) {
-				//A와 B의 길이가 같으면서, A와 B의 차이를 최소가 되도록 했을 때, 차이를 출력
+			for (int j = 0; j < A.length(); j++) {
+				if(A.charAt(j) != B.charAt(i + j)) {
+					cnt++;
+				}
 			}
+			len = Math.min(len, cnt);
 		}
-
+		bw.write(len + "");
 		bw.flush();
 		bw.close();
 	}
