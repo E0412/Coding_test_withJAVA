@@ -19,18 +19,26 @@ public class B_1124 {
 
 		boolean[] pList = new boolean[B + 1]; 
 		int[] pCnt = new int[B + 1]; 
-
+		pList[0] = pList[1] = true;
+		
 		for (int i = 2; i <= B; i++) {
 			if(pList[i]) continue;
 
-			for (int j = i + i; j <= B; j++) {
+			for (int j = i + i; j <= B; j += i) {
 				pList[j] = true; //소수 체크
 				int len = j;
 				//소수의 목록 길이가 소수인 경우
-
+				while(len % i == 0) {
+					len /= i;
+					pCnt[j]++;
+				}
 			}
 		}
-
+		//언더프라임의 개수를 구한다 
+		for (int i = A; i <= B; i++) {
+			if(!pList[pCnt[i]]) cnt++;
+		}
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
