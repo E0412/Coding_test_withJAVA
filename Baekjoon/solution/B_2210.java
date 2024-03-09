@@ -2,7 +2,6 @@ package solution;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.StringTokenizer;
 
 //숫자판 점프 
@@ -25,24 +24,40 @@ public class B_2210 {
 			return;
 		}
 		//깊이(d)가 6이 될 때까지 배열 할당
-		
+		arr[d - 1] = graph[x][y];
+
+		//상하좌우 탐색
+		for (int i = 0; i < 4; i++) {
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if(nx >= 0 && nx <= 4 && ny >= 0 && ny <= 4)
+				DFS(nx, ny, d + 1);
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st  = new StringTokenizer(br.readLine());
 
 		graph = new int[5][5];
 		arr = new int[6];
 
 		//할당
 		for (int i = 0; i < 5; i++) {
+			StringTokenizer st  = new StringTokenizer(br.readLine());
 			for (int j = 0; j < 5; j++) {
 				graph[i][j] = Integer.parseInt(st.nextToken()); 
 			}
 		}
 
+		list = new ArrayList<String>();
+		for (int i = 0; i <= 4; i++) {
+			for (int j = 0; j <= 4; j++) {
+				DFS(i, j, 1);
+			}
+		}
+		bw.write(list.size() + "");
 		bw.flush();
 		bw.close();
 	}
