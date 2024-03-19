@@ -26,8 +26,23 @@ public class B_1141 {
 			}
 		});
 
-		//접두사X 집합인 부분집합의 최대 크기를 출력
+		int cnt = 0;
 
+		//접두사X 집합인 부분집합의 최대 크기를 출력
+		for (int i = 0; i < N; i++) {
+			boolean chk = false;
+			for (int j = i + 1; j < N; j++) {
+				String n = arr[i];
+				String m = arr[j];
+
+				if(m.startsWith(n)) {
+					chk = true;
+					break;
+				}
+			}
+			if(!chk) cnt++;
+		}
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
