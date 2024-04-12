@@ -9,6 +9,17 @@ public class B_1182 {
 	static int N, S, cnt;
 	static int[] sub; //부분수열
 
+	static void DFS(int d, int sum) {
+		if(d == N) {
+			if(sum == S) cnt++;
+			return;
+		}
+		//원소를 선택했을 때 합
+		DFS(d + 1, sum + sub[d]);
+		//원소를 선택하지 않았을 때 합
+		DFS(d + 1, sum);
+	}
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -23,8 +34,11 @@ public class B_1182 {
 			sub[i] = Integer.parseInt(st.nextToken());
 		}
 
-		//부분수열의 개수 구하기
+		DFS(0, 0);
 
+		if(S == 0) cnt--;
+		
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
