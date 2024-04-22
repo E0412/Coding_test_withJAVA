@@ -25,10 +25,26 @@ public class B_4889 {
 
 			//안정적인 문자열 구하기
 			for (int i = 0; i < arr.length; i++) {
-				
+				//'{'인 경우 스택에 추가
+				if(arr[i] == '{') {
+					s.add(arr[i]); 
+				} 
+				//'}'인 경우 
+				else {
+					if(s.isEmpty()) {
+						min++;
+						s.add('{');
+					} else {
+						s.pop();
+					}
+				}
 			}
+			if(!s.isEmpty()) {
+				min += s.size() / 2;
+			}
+			bw.write(tNum + ". " + min + "\n");
+			tNum++;
 		}
-
 		bw.flush();
 		bw.close();
 	}
