@@ -17,13 +17,24 @@ public class B_1193 {
 			if(X <= cnt + sum) {
 				//대각선 개수가 홀수인 경우
 				if(cnt % 2 == 1) {
-					//출력할 분수 구하기
-					bw.write("");
+					/* 분자 : 대각선 블럭의 개수 - (X번 - 직전 대각선까지 블럭 개수 - 1)
+					 * 분모 : X번 - 직전 대각선까지 블럭 개수
+					 */
+					bw.write((cnt - (X - sum - 1)) + "/" + (X - sum));
+					bw.flush();
+					break;
+				} 
+				//대각선의 개수가 짝수인 경우 반대로 출력
+				else {
+					bw.write((X - sum) + "/" + (cnt - (X - sum - 1)));
+					bw.flush();
 					break;
 				}
+			} else {
+				sum += cnt;
+				cnt++;
 			}
 		}
-		bw.flush();
 		bw.close();
 	}
 }
