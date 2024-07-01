@@ -8,16 +8,28 @@ public class B_4948 {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		int N = Integer.parseInt(br.readLine());
+		while(true) {
+			int N = Integer.parseInt(br.readLine());
+			if(N == 0) break;
 
-		while(N != 0) {
-			N = Integer.parseInt(br.readLine());
 			int cnt = 0;
 
-			//각 테스트 케이스에 대해서, n보다 크고, 2n보다 작거나 같은 소수의 개수를 출력
+			boolean[] arr = new boolean[(2 * N) + 1];
+			arr[0] = arr[1] = true; //0과 1 소수 제외 
 
+			for (int i = 2; (i * i) <= (2 * N); i++) {
+				if(!arr[i]) 
+					for (int j = (i * i); j <= 2 * N; j += i) {
+						arr[j] = true;
+					}
+			}
+
+			//n보다 크고, 2n보다 작거나 같은 경우 cnt++
+			for (int i = N + 1; i <= 2 * N; i++) {
+				if(!arr[i]) cnt++;
+			}
+			bw.write(cnt + "\n");
 		}
-
 		bw.flush();
 		bw.close();
 	}
