@@ -10,14 +10,19 @@ public class B_1212 {
 		StringBuilder sb = new StringBuilder();
 
 		String in = br.readLine();
-		String[] arr = {"000", "001", "010", "011", "100", "101", "111"};
-
 
 		for (int i = 0; i < in.length(); i++) {
-			int n = in.charAt(i) - '0';
-			sb.append(arr[n]);
-		}
+			//숫자를 2진수 문자열로 변환
+			String s = Integer.toBinaryString(in.charAt(i) - '0');
 
+			if(s.length() == 2 && i != 0) {
+				s = "0" + s;
+			} else if(s.length() == 1 && i != 0) {
+				s = "00" + s;
+			}
+			sb.append(s);
+		}
+		bw.write(sb.toString());
 		bw.flush();
 		bw.close();
 	}
