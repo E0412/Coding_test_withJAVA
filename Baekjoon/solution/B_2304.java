@@ -13,8 +13,10 @@ public class B_2304 {
 
 		int N = Integer.parseInt(br.readLine());
 		int arr[] = new int[1001];
+
 		int s = Integer.MAX_VALUE; //시작점
 		int e = 0; //끝점
+		int ans = 0;
 
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -44,7 +46,24 @@ public class B_2304 {
 		in.clear(); //스택 초기화
 
 		//오른쪽
+		tmp = arr[e];
+		for (int i = e - 1; i >= s; i--) {
+			if(arr[i] < tmp) {
+				in.push(i);
+			} else {
+				while(!in.isEmpty()) {
+					int n = in.pop();
+					arr[n] = tmp;
+				}
+				tmp = arr[i];
+			}
+		}
 
+		for (int i = s; i <= e; i++) {
+			ans += arr[i];
+		}
+
+		bw.write(ans + "\n");
 		bw.flush();
 		bw.close();
 	}
