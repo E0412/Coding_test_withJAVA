@@ -20,9 +20,15 @@ public class B_2312 {
 			for (int j = 2; j <= tmp; j++) {
 				int result = 0;
 
+				while(tmp % j == 0) {
+					tmp /= j;
+					result++;
+				}
+				if(result != 0) {
+					bw.write(j + " " + result + "\n");
+				}
 			}
 		}
-
 		bw.flush();
 		bw.close();
 	}
