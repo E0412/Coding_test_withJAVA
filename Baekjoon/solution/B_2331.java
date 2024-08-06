@@ -10,30 +10,28 @@ public class B_2331 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer	st = new StringTokenizer(br.readLine());
 
-		String N = st.nextToken();
+		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
 
-		List<String> list = new ArrayList<>();
+		List<Integer> list = new ArrayList<Integer>();
 		list.add(N);
 
-		int num = 0;
-		//반복되는 부분을 제외했을 때, 수열에 남게 되는 수들의 개수를 출력
-		for (int i = 0; i < N.length(); i++) {
-			num += Math.pow(N.charAt(i) - '0', M);
+		while(true) {
+			int num = list.get(list.size() - 1);
+
+			int next = 0;
+			while(num != 0) {
+				next += (int) Math.pow(num % 10, (double) M);
+				next /= 10;
+			}
+
+			if(list.contains(next)) {
+				int answer = list.indexOf(next);
+				bw.write(answer + "\n");
+				break;
+			}
+			list.add(next);
 		}
-		
-		String next = String.valueOf(num);
-		int answer = 0;
-		if(list.contains(next)) {
-			answer = list.indexOf(next);
-			return;
-		} else {
-			list.add(String.valueOf(next));
-			
-		}
-		
-		
-		
 		bw.flush();
 		bw.close();
 	}
