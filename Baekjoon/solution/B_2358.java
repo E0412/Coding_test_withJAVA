@@ -22,9 +22,24 @@ public class B_2358 {
 			xCnt.put(x, xCnt.getOrDefault(x, 0) + 1);
 			yCnt.put(y, yCnt.getOrDefault(y, 0) + 1);
 		}
-		//x축 또는 y축에 평행한 직선이 몇 개인지 작성
-		int ans = 0;
 
+		int cnt = 0;
+
+		//x축 또는 y축에 평행한 직선이 몇 개인지 작성
+		for (int x : xCnt.values()) {
+			//같은 좌표가 2개 이상일 때 개수 증가
+			if(x > 1) {
+				cnt++;
+			}
+		}
+
+		for (int y : yCnt.values()) {
+			if(y > 1) {
+				cnt++;
+			}
+		}
+
+		bw.write(cnt + "");
 		bw.flush();
 		bw.close();
 	}
