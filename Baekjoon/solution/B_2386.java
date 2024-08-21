@@ -10,18 +10,29 @@ public class B_2386 {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringTokenizer	st;
 
-		int cnt = 0;
-
 		while(true) {
 			String s = br.readLine();
 
-			if(s.equals("#")) break; //입력의 마지막은 #이다
+			if(s.equals("#")) {
+				break; //입력의 마지막은 #이다
+			}
 
-			st = new StringTokenizer(br.readLine(), " ");
-			char c = st.nextToken().charAt(0);
+			st = new StringTokenizer(s, " ");
+			char word = st.nextToken().charAt(0);
 
-			//소문자로 변환 후 같은 단어 개수를 찾기 
+			String in = "";
 
+			while(st.hasMoreTokens()) {
+				in += st.nextToken();
+			}
+
+			int cnt = 0;
+			//소문자로 변환 후 같은 단어 개수 찾기 
+			for(char ch : in.toLowerCase().toCharArray()) {
+				if(ch == word) cnt++;
+			}
+
+			bw.write(word + " " + cnt + "\n");
 		}
 		bw.flush();
 		bw.close();
