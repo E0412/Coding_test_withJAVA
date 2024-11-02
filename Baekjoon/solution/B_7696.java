@@ -12,14 +12,22 @@ public class B_7696 {
 		Arrays.fill(flag, false);
 
 		//중복체크
+		while(cnt > 0) {
+			int num = cnt % 10;
 
+			if(flag[num]) {
+				return true;
+			}
+
+			flag[num] = true;
+			cnt /= 10;
+		}	
 		return false;
 	}
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuilder sb = new StringBuilder();
 
 		ArrayList<Integer> list = new ArrayList<>();
 
@@ -37,6 +45,7 @@ public class B_7696 {
 		while(true) {
 			int n = Integer.parseInt(br.readLine());
 			if(n == 0) break;
+			bw.write(list.get(n - 1) + "\n");
 		}
 		bw.flush();
 		bw.close();
