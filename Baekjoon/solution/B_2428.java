@@ -12,7 +12,7 @@ public class B_2428 {
 	//이분탐색
 	static int binarySearch(int in) {
 		int start = in + 1;
-		int end = arr.length - 1;
+		int end = arr.length;
 		int tmp = start;
 
 		//검사하지 않는 경우 
@@ -20,9 +20,14 @@ public class B_2428 {
 
 		while(start < end) {
 			int mid = (start + end) / 2;
-			// i≠j이고, size(Fi) ≤ size(Fj)이면서, size(Fi) ≥ 0.9 × size(Fj)인 쌍 검사	
+			// i≠j이고, size(Fi) ≤ size(Fj)이면서, size(Fi) ≥ 0.9 × size(Fj)인 쌍 검사
+			if(arr[in] <= arr[mid] && arr[in] * 10 >= arr[mid] * 9) {
+				tmp = mid;
+				start = mid + 1;
+			} else {
+				end = mid - 1;
+			}
 		}
-
 		return tmp;
 	}
 
@@ -44,7 +49,7 @@ public class B_2428 {
 		long answer = 0; //비교 횟수
 
 		for (int i = 0; i < arr.length - 1; i++) {
-
+			answer += binarySearch(i) - i;
 		}
 		bw.write(answer + "");
 		bw.flush();
