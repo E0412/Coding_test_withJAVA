@@ -22,6 +22,23 @@ public class B_2456 {
 		}
 
 		//회장 후보 번호와 최고 점수 출력, 결정 못할시 0
+		int max = -1;
+		int m_cnt = 0; //최댓값 개수 
+		int m_num = -1; 
+		boolean check = false;
+
+		for (int i = 1; i <= 3; i++) {
+			int sum = arr[i][1] + 2 * arr[i][2] + 3 * arr[i][3];
+			if(sum > max) {
+				max = sum;
+				m_cnt++;
+				m_num = i; //i번 후보가 최댓값
+			}
+			//가장 큰 sum 값이 2개 이상일 때 
+			else if(sum == max) {
+
+			}
+		}
 
 		bw.flush();
 		bw.close();
