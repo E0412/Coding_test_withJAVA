@@ -35,11 +35,30 @@ public class B_2456 {
 				m_num = i; //i번 후보가 최댓값
 			}
 			//가장 큰 sum 값이 2개 이상일 때 
-			else if(sum == max) {
-
+			else if (sum == max) {
+				//새로운 후보의 3점 개수가 기존 후보보다 큰 경우 
+				if(arr[m_num][3] < arr[i][3]) {
+					m_num = i; //당선 후보 변경
+					check = false;
+				} 
+				//3점 개수가 동점이고, 새로운 후보의 2점 개수가 큰 경우
+				else if (arr[m_num][3] == arr[i][3] && arr[m_num][2] < arr[i][2]) {
+					m_num = i;
+					check = false;
+				} 
+				//동점자
+				else if (arr[m_num][3] == arr[i][3] && arr[m_num][2] == arr[i][2]) {
+					check = true;
+				}
 			}
 		}
 
+		if(!check) {
+			bw.write(m_num + " " + max);
+		} else {
+			m_num = 0;
+			bw.write(m_num + " " + max);
+		}
 		bw.flush();
 		bw.close();
 	}
