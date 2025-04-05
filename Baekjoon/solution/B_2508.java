@@ -1,10 +1,6 @@
 package solution;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.StringTokenizer;
 
 //사탕 박사 고창영
@@ -28,13 +24,30 @@ public class B_2508 {
 			for (int a = 0; a < r; a++) {
 				String s = br.readLine();
 				for (int b = 0; b < c; b++) {
-					arr[a][b] = s.charAt(b); 
+					arr[a][b] = s.charAt(b);
 				}
 			}
 
-			//사탕의 개수 출력 
-		}
+			int cnt = 0;
+			for (int a = 0; a < r; a++) {
+				for (int b = 0; b < c - 2; b++) {
+					if(arr[a][b] == '>' && arr[a][b + 1] == 'o' 
+							&& arr[a][b + 2] == '<') {
+						cnt++;
+					}
+				}
+			}
 
+			for (int a = 0; a < c; a++) {
+				for (int b = 0; b < r - 2; b++) {
+					if(arr[a][b] == 'v' && arr[a + 1][b] == 'o' 
+							&& arr[a + 2][b] == '^') {
+						cnt++;
+					}	
+				}
+			}
+			bw.write(cnt + "");
+		}
 		bw.flush();
 		bw.close();
 	}
