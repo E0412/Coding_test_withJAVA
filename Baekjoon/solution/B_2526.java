@@ -13,21 +13,26 @@ public class B_2526 {
 		int N = Integer.parseInt(st.nextToken());
 		int P = Integer.parseInt(st.nextToken());
 
-		int sum = ((N * N) % P);
+		int sum = N;
 		int cnt = 0;
-		int[] arr = new int[1001]; //출력되는 수 저장 
+		int[] arr = new int[P + 1]; //서로 다른 수의 개수
+		boolean chk = false;
 
-		//1.먼저 N에 N을 곱한다 
-		int one = N * N;
-		//2.이 수를 P로 나눈 나머지를 출력한다
-		int two = one % P;
-		//3.나머지에 N을 곱하고 P로 나뭄 나머지를 출력한다(반복)
-		int three = two * N % P;
-		//만약 three = 이전에 나온 수 -> cnt++
+		while(!chk) {
+			sum = N * sum % P;
 
-		while(true) {
-
+			//반복 체크
+			for (int i = 0; i < cnt; i++) {
+				if(arr[i] == sum) {
+					chk = true;
+					bw.write(String.valueOf(cnt - i));
+					break;
+				}
+			}
+			arr[cnt] = sum; //반복되지 않은 경우
+			cnt++; 
 		}
-
+		bw.flush();
+		bw.close();
 	}
 }
