@@ -14,12 +14,21 @@ public class B_2529 {
 
 
 	static void DFS(int p, int cnt, String num) {
-		if(cnt == K) {
+		//종료조건
+		if(cnt == K) { //K개의 숫자를 전부 뽑은 경우 
 			ans.add(num);
 			return;
 		}
-
-		//탐색
+		for (int i = 0; i < 10; i++) {
+			if(!visited[i]) {
+				//<인 경우 현재 순서 < 다음 순서, >인 경우 현재 > 다음
+				if((arr[cnt] == '<' && p < i) || (arr[cnt] == '>' && p > i)) {
+					visited[i] = true;
+					DFS(i, cnt + 1, num + i);
+					visited[i] = false;
+				}
+			}
+		}
 	}
 
 	public static void main(String[] args) throws IOException {
@@ -39,8 +48,8 @@ public class B_2529 {
 			DFS(i, 0, i + ""); //i + "" -> 문자열로 변경
 			visited[i] = false; 
 		}
-
-		
+		bw.write(ans.get(ans.size() - 1) + "\n");
+		bw.write(ans.get(0) + "\n");
 		bw.flush();
 		bw.close();
 	}	
