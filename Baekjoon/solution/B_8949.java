@@ -7,20 +7,38 @@ public class B_8949 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuilder sb = new StringBuilder();
 
-		int[] A = new int[10000000];
-		int[] B = new int[10000000];
+		char[] A = new char[10000000];
+		char[] B = new char[10000000];
 
+		//입력방식 수정필요
 		for (int i = 0; i < A.length; i++) {
-			A[i] = Integer.parseInt(br.readLine());
+			A[i] = br.readLine().charAt(0);
 		}
 
 		for (int i = 0; i < B.length; i++) {
-			B[i] = Integer.parseInt(br.readLine());
+			B[i] = br.readLine().charAt(0);
 		}
 
-		//자릿수에 맞게 각각 더한값을 합쳐야함
-
+		int a = A.length; int b = B.length;
+		
+		if(a > b) {
+			for (int i = a; i >= 0; i--) {
+//				sb.append(A[i] + B[i]);
+				System.out.println(A[i]+ B[i] );
+			}
+		} else if(b > a) {
+			for (int i = b; i >= 0; i--) {
+//				sb.append(A[i] + B[i]);
+		}
+		} else {
+			for (int i = a; i >= 0; i--) {
+//				sb.append(A[i] + B[i]);
+				System.out.println(A[i]+ B[i] );
+			}
+		}
+//		bw.write(sb.reverse().toString());
 		bw.flush();
 		bw.close();
 	}
