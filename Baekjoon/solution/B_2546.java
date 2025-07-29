@@ -11,39 +11,43 @@ import java.util.StringTokenizer;
 public class B_2546 {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int T = Integer.parseInt(br.readLine());
 
 		//테스트 케이스만큼 반복
 		while(T-- > 0) {
-
 			br.readLine(); //공백
 
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			int N = Integer.parseInt(st.nextToken()); //c언어 수강생 IQ
 			int M = Integer.parseInt(st.nextToken()); //경제학 원론 IQ
 
-			int n[] = new int[N + 1];
-			int m[] = new int[M + 1];
+			int n[] = new int[N];
+
+			//int형 사용시 틀림 -> double로 변경
+			double avgC = 0; //c언어 평균
+			double avgE = 0; //경제학 평균
 
 			st = new StringTokenizer(br.readLine());
 			for (int i = 0; i < N; i++) {
-				n[i] = Integer.parseInt(st.nextToken()); 
-				System.out.print(n[i] + " "); //제대로 입력됐는지 확인
+				n[i] = Integer.parseInt(st.nextToken());
+				avgC += n[i];
 			}
+
 			st = new StringTokenizer(br.readLine());
 			for (int i = 0; i < M; i++) {
-				m[i] = Integer.parseInt(st.nextToken()); 
-				System.out.print(m[i] + " ");
+				avgE += Integer.parseInt(st.nextToken());
 			}
-			//각 과목의 평균을 구하고 c언어 평균보다 낮고 경제학에서는 높은 경우 +1
+
 			int cnt = 0;
 
+			for (int i = 0; i < N; i++) { 
+				//C언어 평균보다는 낮고, 경제학 평균보다는 높은 경우 cnt++
+				if(avgC / N > n[i] && avgE / M < n[i]) 
+					cnt++;
+			}
+			System.out.println(cnt);
 		}
-
-		bw.flush();
-		bw.close();
 	}
 }
 
