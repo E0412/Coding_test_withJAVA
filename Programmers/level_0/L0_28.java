@@ -42,20 +42,23 @@ public class L0_28 {
 		}
 
 		//2개가 같고 각각 다른 경우
-		if(a == b && b != c && b != d && c != d) { //ab c d
+		if(a == b && b != c && b != d && c != d) { 
 			p = a; q = c; r = d;
 			sum = q * r;
-		} else if(a != b && a == c && a != d && b != d) { //ac b d
+		} else if(a != b && a == c && c != d && b != d) { 
 			p = a; q = b; r = d;
 			sum = q * r;
-		} else if(a != b && a == d && a != c && b != c) {
+		} else if(a != b && a != c && a == d && b != c) {
 			p = a; q = b; r = c;
 			sum = q * r;
 		} else if(a != b && b == c && c != d && a != d) {
 			p = b; q = a; r = d;
 			sum = q * r;
-		} else if(a != b && b != c && c == d && a != b) {
+		} else if(a != b && b != c && c == d && a != c) {
 			p = c; q = a; r = b;
+			sum = q * r;
+		} else if(a != b && a != c && c != b && b == d) {
+			q = a; r = c;
 			sum = q * r;
 		}
 
