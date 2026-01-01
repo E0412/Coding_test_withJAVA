@@ -12,15 +12,17 @@ public class B_1919 {
 		char[] n = new char[26];
 		char[] m = new char[26];
 
+		//각 단어(a, b)의 등장 횟수 저장
 		for (int i = 0; i < a.length(); i++) {
 			n[a.charAt(i) - 'a']++;
 		}
 
 		for (int i = 0; i < b.length(); i++) {
-			m[a.charAt(i) - 'a']++;
+			m[b.charAt(i) - 'a']++; //a -> b로 수정
 		}
 
 		int answer = 0;
+		//문자의 등장 횟수 차이의 절댓값을 answer에 더한다
 		for (int i = 0; i < 26; i++) {
 			answer += Math.abs(n[i] - m[i]);
 		}
