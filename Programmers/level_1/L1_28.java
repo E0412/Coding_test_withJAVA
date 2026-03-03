@@ -4,31 +4,14 @@ package level_1;
 public class L1_28 {
 	public int solution(int left, int right) {
 		int answer = 0;
-		int l = 0; //left의 약수 개수
-		int r = 0;
-		for(int i = 1; i <= left; i++) {
-			if(left % i == 0) {
-				l++;
+		//left~right 사이를 순회하여 더하고 약수의 개수가 홀수인 완전제곱수를 빼는 문제이다
+		for (int i = left; i <= right; i++) {
+			int n = (int) Math.sqrt(i); //제곱근
+			if(n * n == i) {
+				answer -= i;
+			} else {
+				answer += i;
 			}
-		}
-		for(int i = 1; i <= right; i++) {
-			if(right % i == 0) {
-				r++;
-			}
-		}
-		if(l % 2 == 0 && r % 2 == 0) {
-			answer += left;
-			answer += right;
-			System.out.println(answer);
-		} else if(l % 2 != 0 && r % 2 == 0) {
-			answer -= left;
-			answer += right;
-		} else if(l % 2 != 0 && r % 2 != 0) {
-			answer -= left;
-			answer -= right;
-		} else if(l % 2 == 0 && r % 2 != 0) {
-			answer += left;
-			answer -= right;
 		}
 		return answer;
 	}
