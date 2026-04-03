@@ -4,26 +4,33 @@ package level_0;
 public class L0_157 {
 	public String solution(String polynomial) {
 		StringBuilder sb = new StringBuilder();
+
+		String[] sArr = polynomial.split(" \\+ ");
+		int xNum = 0;
 		int num = 0;
-		int constant = 0;
-		for(int i = 1; i < polynomial.length(); i++) {
-			if(polynomial.charAt(i) == 'x') {
-				if(i == 0) {
-					num++;
+
+		for(String s : sArr) {
+			if(s.contains("x")) { //2x 5x
+				if(s.equals("x")) {
+					xNum++;
+				} else {
+					//x의 계수만 더한다
+					xNum += Integer.parseInt(s.replace("x", ""));
 				}
-				else if(polynomial.charAt(i-1) > '0') {
-					num += polynomial.charAt(i - 1) - '0';
-				} else if(polynomial.charAt(i-1) == ' ') {
-					num++;
-				}
-			} 
-			//숫자인 경우
-			else if(polynomial.charAt(i) > 65) {
-				constant = polynomial.charAt(i) - '0';
+			} else { //정수
+				num += Integer.parseInt(s);
 			}
 		}
-		//상수값을 가진경우와 아닌경우를 구분해야함
-		sb.append(num).append("x");
+		//x의 계수가 1이라 생략하는 경우
+		if(xNum == 1) {
+			if(num > 0) sb.append("x").append(" + ").append(num);
+			else sb.append("x");
+		} else if(xNum == 0) { //x가 없는 경우
+			sb.append(num);
+		} else {
+			if(num == 0) sb.append(xNum).append("x");
+			else sb.append(xNum).append("x").append(" + ").append(num);
+		}
 		return sb.toString();
 	}
 }
