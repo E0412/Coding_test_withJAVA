@@ -9,7 +9,8 @@ public class L1_39 {
         
         for(int i = 0; i < commands.length; i++) {
             List<Integer> list = new ArrayList<>();
-            for(int j = commands[i][0] - 1; j < commands[i][1] - 1; j++) {
+            //범위 수정
+            for(int j = commands[i][0] - 1; j <= commands[i][1] - 1; j++) {
                 list.add(array[j]);
             }
             Collections.sort(list);
