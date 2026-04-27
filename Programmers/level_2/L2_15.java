@@ -7,16 +7,21 @@ public class L2_15 {
 	public int solution(int k, int[] tangerine) {
 		int answer = 0;
 
-		List<Integer> list = new ArrayList<Integer>();
+		//중복되는 수 분류 필요 -> map 활용
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
 		for(int i : tangerine) {
-			list.add(i);
+			map.put(i, map.getOrDefault(i, 0) + 1);
 		}
-		Collections.sort(list);
-		//중복되는 수 분류 필요 
-		for (int i = 1; i <= k; i++) {
-			if(list.get(i-1) != list.get(i)) {
-				answer++;
+		List<Integer> list = new ArrayList<Integer>(map.values());
+		Collections.sort(list, Collections.reverseOrder()); //내림차순 정렬(가장 많이 중복되는 순서)
+
+		int sum = 0;
+		for(int idx : list) {
+			sum += idx; //선택한 귤의 총 개수
+			answer++; //종류의 수
+			if(sum >= k) {
+				break;
 			}
 		}
 		return answer;
