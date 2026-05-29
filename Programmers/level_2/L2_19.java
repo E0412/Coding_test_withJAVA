@@ -8,18 +8,19 @@ public class L2_19 {
 		int answer = 0;
 		Arrays.sort(people);
 
-		//앞 인덱스와 비교하게됨 -> 다른 방식 찾기
-		int sum = 0;
-		for(int i = 0; i < people.length; i++) {
-			sum += people[i];
-			if(sum > limit) {
-				sum -= people[i-1];
-				answer++;
-			} else if(sum == limit) {
-				answer++;
-				sum -= limit;
-			} 
+		//투포인터 방식 사용
+		int l = 0;
+		int r = people.length - 1;
+
+		while(l <= r) {
+			//같이 타는 경우, 작은 수끼리 더하면 무거운 사람이 혼자 남아 최소가 안됨
+			if(people[l] + people[r] <= limit) {
+				l++;
+			}
+			r--; //가장 큰 수 삭제
+			answer++; //보트 사용
 		}
+
 		return answer;
 	}
 }
