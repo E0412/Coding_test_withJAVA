@@ -12,10 +12,22 @@ public class L0_181 {
 		for(int i = 0; i < array.length; i++) {
 			map.put(array[i], map.getOrDefault(array[i], 0) + 1);
 		}
-		//수정필요 : 최빈값을 구해야하는데 횟수를 반환함
-		for(int num : map.values()) {
-			answer = Math.max(answer, num);
+
+		int max = 0; //최대 value값
+		int cnt = 0; //최빈값 개수
+
+		//entrySet() 활용
+		for(Map.Entry<Integer, Integer> e : map.entrySet()) {
+
+			if(e.getValue() > max) {
+				max = e.getValue();
+				answer = e.getKey(); //최빈값
+				cnt = 1;
+			} else if(e.getValue() == max) {
+				cnt++;
+			}
 		}
-		return answer;
+
+		return cnt > 1 ? -1 : answer;
 	}
 }
