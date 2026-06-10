@@ -6,11 +6,17 @@ import java.util.*;
 public class L2_21 {
 	public int solution(int[] elements) {
 		Set<Integer> set = new HashSet<>();
-		for(int i = 0; i < elements.length; i++) {
+		int[] arr = new int[elements.length * 2];
+
+		for (int i = 0; i < elements.length; i++) {
+			arr[i] = elements[i];
+			arr[i + elements.length] = elements[i];
+		}
+
+		for(int i = 1; i <= elements.length; i++) { //길이
 			int sum = 0;
-			set.add(elements[i]);
-			for(int j = 1; j < elements.length; j++) {
-				sum = elements[i] + elements[j];
+			for(int j = 0; j < arr.length; j++) {
+				sum += arr[i + j];
 				set.add(sum);
 			}
 		}
