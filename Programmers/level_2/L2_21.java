@@ -13,14 +13,13 @@ public class L2_21 {
 			arr[i + elements.length] = elements[i];
 		}
 
-		for(int i = 1; i <= elements.length; i++) { //길이
+		for(int i = 0; i < elements.length; i++) {
 			int sum = 0;
-			for(int j = 0; j < arr.length; j++) {
-				sum += arr[i + j];
+			for(int len = 1; len <= elements.length; len++) { //길이
+				sum += arr[i + len - 1]; //누적합
 				set.add(sum);
 			}
 		}
-		int answer = set.size();
-		return answer;
+		return set.size();
 	}
 }
