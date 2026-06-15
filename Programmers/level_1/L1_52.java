@@ -14,12 +14,9 @@ public class L1_52 {
         	각 묶음의 마지막 원소(최저점수) 찾기
         	최저점수 x m
 		 */
-		for(int i = 0; i < score.length; i++) {
-			if(len - m >= m) {
-				answer += (score[len - m] * m);
-			}
+		for(int i = score.length % m; i < score.length; i += m) {
+			answer += score[i] * m;
 		}
-
 		return answer;
 	}
 }
