@@ -5,12 +5,14 @@ public class L2_25 {
 	public int solution(int n) {
 		int ans = 0;
 
-		int num = 0;
-
-		while(num == n) {
-
+		while(n > 0) {
+			if(n % 2 == 1) {
+				ans++;
+				n--;
+			} else {
+				n /= 2;
+			}
 		}
-
 		return ans;
 	}
 }
