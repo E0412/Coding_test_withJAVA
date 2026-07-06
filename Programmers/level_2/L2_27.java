@@ -6,11 +6,11 @@ public class L2_27 {
 		int answer = 0;
 
 		//2^n의 n을 정답으로 생각(실패) -> a와 b 값을 조정하면서 구해야 함
-		while(n > 1) {
-			n /= 2;
+		while(a != b) {
 			answer++;
+			a = (a + 1) / 2;
+			b = (b + 1) / 2;
 		}
-
 		return answer;
 	}
 }
