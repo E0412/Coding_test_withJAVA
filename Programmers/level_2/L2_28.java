@@ -13,24 +13,26 @@ public class L2_28 {
 			q.offer(new int[] {i, priorities[i]}); //현재 위치와 순서 저장
 		}
 
-		//정렬된 배열 생성
-		Arrays.sort(priorities);
+		//우선순위를 정렬한 배열 생성
 		int[] arr = priorities.clone();
-		int m = 0;
-		for(int i = priorities.length - 1; i > 0; i--) {
-			arr[m++] = priorities[i];
-		} 
+		Arrays.sort(arr);
 
-		int idx = 0;
+		int idx = arr.length - 1;
+		//프로세스 위치에 따른 우선순위 구하기
 		while(!q.isEmpty()) {
-			//프로세스 위치에 따른 우선순위 구하기
 
 			int[] current = q.poll(); //맨 앞을 꺼낸다 
-			
-			//뒤에 나보다 우선순위가 높은 프로세스가 있는지 확인
+
+			//현재 프로세스의 우선순위가 가장 높은지 확인
 			if(current[1] == arr[idx]) {
+				idx--; //역순으로 확인
+				answer++;
 
-
+				if(current[0] == location) {
+					return answer;
+				}
+			} else {
+				q.offer(current); //우선순위가 높은 프로세스가 있는 경우 뒤로 보낸다
 			}
 		}
 		return answer;
