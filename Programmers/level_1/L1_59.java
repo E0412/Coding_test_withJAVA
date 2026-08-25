@@ -1,6 +1,8 @@
 package level_1;
 
-//실패율
+import java.util.*;
+
+//실패율, 블로그 풀이 참고함
 public class L1_59 {
 	public int[] solution(int N, int[] stages) {
 		int[] answer = new int[N + 1];
@@ -32,8 +34,22 @@ public class L1_59 {
 			}
 		}
 
-		//스테이지 번호 구현 필요
+		//스테이지 번호를 list에 넣는다
+		List<Integer> list = new ArrayList<Integer>();
 
-		return answer;
+		for(int i = 1; i <= N; i++) {
+			list.add(i);
+		}
+
+		//실패율이 높은 순서로 정렬
+		list.sort((a, b) -> {
+			//실패율이 같으면 작은 번호부터 
+			if(fail[a] == fail[b]) {
+				return a - b;
+			}
+			return Double.compare(fail[b], fail[a]);
+		});
+
+		return list.stream().mapToInt(i -> i).toArray();
 	}
 }
