@@ -5,20 +5,23 @@ import java.util.*;
 //택배상자
 public class L2_36 {
 	public int solution(int[] order) {
-		List<Integer> truck = new ArrayList<>(); //트럭
 		Stack<Integer> s = new Stack<>(); //보조 컨테이너
 
+		int answer = 0;
+		int idx = 0;
+
 		for(int i = 1; i <= order.length; i++) {
-			if(order[i-1] == i) {
-				truck.add(i);
-			} 
-			else if(!s.isEmpty() && s.peek() == order[i-1]) {
-				truck.add(s.pop());
-			}
-			else {
-				s.add(i);
+			s.push(i);
+
+			while (!s.isEmpty()
+					&& idx < order.length
+					&& s.peek() == order[idx]) {
+
+				s.pop();
+				answer++;
+				idx++;
 			}
 		}
-		return truck.size();
+		return answer;
 	}
 }
