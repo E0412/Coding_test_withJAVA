@@ -19,25 +19,8 @@ public class L1_61 {
 			}
 		}
 		//순위 변수
-		int best = 0; 
-		int worst = 0;
-
-		//*수정필요 : 랭킹 구하는 로직 생각해보기 
-		if(max + cnt == 6 || cnt == 6) {
-			
-		} else if (max + cnt == 5 || cnt == 5) {
-
-		} else if (max + cnt == 4 || cnt == 4) {
-
-		} else if (max + cnt == 3 || cnt == 3) {
-
-		} else if (max + cnt == 2 || cnt == 2) {
-
-		} else if (max + cnt == 1 || cnt == 1) {
-
-		} else if (max + cnt == 0 || cnt == 0) {
-
-		}
+		int best = Math.min(6, 7 - (cnt + max)); 
+		int worst = Math.min(6, 7 - cnt);
 
 		return new int[] {best, worst};
 	}
