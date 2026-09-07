@@ -7,17 +7,21 @@ public class L2_38 {
 
 		//skill의 순서대로 skill_trees[i]의 값이 나오면 answer++
 		for(int i = 0; i < skill_trees.length; i++) {
+			StringBuilder sb = new StringBuilder();
 
 			//skill_trees 하나씩 검사
 			for(int j = 0; j < skill_trees[i].length(); j++) {
 				char ch = skill_trees[i].charAt(j);
 
-				//수정필요 : 순서대로 나오는지 알 수 없음 
-				if(skill.contains(String.valueOf(ch))) {
-					continue;
+				//c가 skill에 있는 문자면 sb에 추가
+				if(skill.indexOf(ch) != -1) {
+					sb.append(ch);
 				}
-
 			}         
+			//sb가 skill 순서대로 출력되는지 확인
+			if(skill.startsWith(sb.toString())) {
+				answer++;
+			}
 		}
 		return answer;
 	}
