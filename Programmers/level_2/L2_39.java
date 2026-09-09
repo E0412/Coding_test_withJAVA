@@ -1,25 +1,39 @@
 package level_2;
 
-import java.util.Comparator;
+import java.util.*;
 
 //가장 큰 수
 public class L2_39 {
 	public String solution(int[] numbers) {
 		StringBuilder sb = new StringBuilder();
-		//comparator로 순서 결정
-		Comparator<Integer> c = new Comparator<Integer>() {
 
+		//Integer -> String 비교로 변경
+		List<String> list = new ArrayList<>();
+
+		for(int i = 0; i < numbers.length; i++) {
+			list.add(String.valueOf(numbers[i]));         
+		}
+
+		Collections.sort(list, new Comparator<String>() {
+			//값을 합한 뒤 정렬
 			@Override
-			public int compare(Integer o1, Integer o2) {
-				if(o1 > o2) {
-					//수정 필요 : comparator에서 정렬이 끝난 후 담아야함, 두자리 수 구분이 어려움
-					sb.append(String.valueOf(o1)).append(String.valueOf(o2));
-				} else if(o1 < o2) {
-					sb.append(String.valueOf(o2)).append(String.valueOf(o1));
-				}
-				return 0;
+			public int compare(String a, String b) {
+				String ab = a + b;
+				String ba = b + a;
+
+				return ba.compareTo(ab);
 			}
-		};
+		});     
+
+		for(String s : list) {
+			sb.append(s);
+		}
+
+		//numbers가 전부 0인 경우 
+		if(sb.charAt(0) == '0') {
+			return "0";
+		}
+
 		return sb.toString();
 	}
 }
