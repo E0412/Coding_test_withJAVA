@@ -35,8 +35,17 @@ public class L1_64 {
 				}
 			}
 		}
-		//역순 정렬 추가 필요
+		//역순으로 정렬 
+		Collections.sort(list, (a, b) -> b.compareTo(a));
+		if(list.isEmpty()) {
+			return "-1";
+		} else if(list.get(0).equals("0")) {
+			return "0";
+		} 
 
+		for(String answer : list) {
+			sb.append(answer);
+		}
 		return sb.toString();
 	}
 }
