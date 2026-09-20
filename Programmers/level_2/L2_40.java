@@ -5,31 +5,46 @@ import java.util.*;
 //두 큐 합 같게 만들기
 public class L2_40 {
 	public int solution(int[] queue1, int[] queue2) {
-		//두 큐의 sum을 구하고 -q1 + q1 / -q2, +q2 (한 사이클), 답은 연산의 횟수를 구해야함 
 		int answer = 0;
 
 		Queue<Integer> q1 = new LinkedList<>();
 		Queue<Integer> q2 = new LinkedList<>();
-		int sum1 = 0;
-		int sum2 = 0;
+
+		long sum1 = 0;
+		long sum2 = 0;
+		//값 할당
 		for(int i : queue1) {
 			q1.add(i);
 			sum1 += i;
 		}
-		for(int i : queue1) {
+		for(int i : queue2) {
 			q2.add(i);
 			sum2 += i;
 		}
 
-		while(sum1 == sum2) {
-			//q1.poll을 q2에 추가, 합 구하기
+		while(sum1 != sum2) { //같아질때까지 작업
+			//총합의 합이 홀수이면 반환, 최대 반복횟수 지정
+			if(sum1 + sum2 % 2 == 1 || q1.size() + q2.size() < answer) {
+				return -1;
+			}
+			//큰 수의 큐에서 값을 빼서 더한다 
+			if(sum1 > sum2) {
+				int tmp = q1.poll();
+				q2.add(tmp);
 
+				sum1 -= tmp;
+				sum2 += tmp;
+				answer++;
+			} 
+			else if(sum1 < sum2) {
+				int tmp = q2.poll();
+				q1.add(tmp);
 
-
-			break;
+				sum2 -= tmp;
+				sum1 += tmp;
+				answer++;
+			}
 		}
-
-
 		return answer;
 	}
 }
