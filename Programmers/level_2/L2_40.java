@@ -23,8 +23,8 @@ public class L2_40 {
 		}
 
 		while(sum1 != sum2) { //같아질때까지 작업
-			//총합의 합이 홀수이면 반환, 최대 반복횟수 지정
-			if(sum1 + sum2 % 2 == 1 || q1.size() + q2.size() < answer) {
+			//총합의 합이 홀수이면 반환(연산 순서 고려), 최대 반복횟수를 왕복을 고려하여 설정
+			if((sum1 + sum2) % 2 == 1 || (q1.size() + q2.size()) * 2 < answer) {
 				return -1;
 			}
 			//큰 수의 큐에서 값을 빼서 더한다 
