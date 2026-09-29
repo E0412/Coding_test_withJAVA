@@ -2,81 +2,48 @@ package level_2;
 
 //방문 길이
 public class L2_41 {
+	int dx[] = {-1, 1, 0, 0};
+	int dy[] = {0, 0, 1, -1};
+	boolean[][][] visited = new boolean[11][11][4];
+
+	int x = 0;
+	int y = 0;
+	int dir = 0;
+	int[] rev = {1, 0, 3, 2}; //반대 위치 배열
+
+	public int move(int dir) {
+		int cnt = 0; //처음가는 길이면 1 아니면 0
+		int nx = x + dx[dir];
+		int ny = y + dy[dir];
+
+		//범위는 -5 ~ 5 사이, 배열에는 음수가 들어갈 수 없어 +5를 하여 검증한다
+		if(nx >= -5 && nx <= 5 && ny >= -5 && ny <= 5) {
+			if(!visited[x + 5][y + 5][dir]) {
+				visited[x + 5][y + 5][dir] = true; 
+				visited[nx + 5][ny + 5][rev[dir]] = true; 
+				cnt++;
+			}
+			//방문 여부에 관계없이 x와 y값 변경
+			x = nx;
+			y = ny;
+		}
+		return cnt;
+	}
+
 	public int solution(String dirs) {
 		int answer = 0;
 
-		//UDRL
-		int dx[] = {-1, 1, 0, 0};
-		int dy[] = {0, 0, 1, -1};
-
-		boolean visited[][][] = new boolean[11][11][4];
-		int x = 0;
-		int y = 0;
-
-		//수정필요 : 이전 좌표도 검증 해야함
 		for (int i = 0; i < dirs.length(); i++) {
+			if(dirs.charAt(i) == 'U') 
+				dir = 0;
+			else if(dirs.charAt(i) == 'D') 
+				dir = 1;
+			else if(dirs.charAt(i) == 'R') 
+				dir = 2;
+			else if(dirs.charAt(i) == 'L') 
+				dir = 3;
 
-			//0 = U 1 = D 2 = R 3 = L
-			if(dirs.charAt(i) == 'U') {
-				int nx = x + dx[0];
-				int ny = y + dy[0];
-
-				if(nx <= 5 && nx >= -5 && ny <= 5 && ny >= -5) {
-					if(!visited[x + 5][y + 5][0]) {
-						visited[x + 5][y + 5][0] = true;
-						visited[nx + 5][ny + 5][0] = true;
-						answer++;
-						//현재 위치를 nx, ny로 변경
-						x = nx;
-						y = ny;
-					}
-				}
-			}
-			else if(dirs.charAt(i) == 'D') {
-				int nx = x + dx[1];
-				int ny = y + dy[1];
-
-				if(nx <= 5 && nx >= -5 && ny <= 5 && ny >= -5) {
-					if(!visited[x + 5][y + 5][1]) {
-						visited[x + 5][y + 5][1] = true;
-						visited[nx + 5][ny + 5][1] = true;
-						answer++;
-
-						x = nx;
-						y = ny;
-					}
-				}
-			}
-			else if(dirs.charAt(i) == 'R') {
-				int nx = x + dx[2];
-				int ny = y + dy[2];
-
-				if(nx <= 5 && nx >= -5 && ny <= 5 && ny >= -5) {
-					if(!visited[x + 5][y + 5][2]) {
-						visited[x + 5][y + 5][2] = true;
-						visited[nx + 5][ny + 5][2] = true;
-						answer++;
-
-						x = nx;
-						y = ny;
-					}
-				}
-			}
-			else if(dirs.charAt(i) == 'L') {
-				int nx = x + dx[3];
-				int ny = y + dy[3];
-
-				if(nx <= 5 && nx >= -5 && ny <= 5 && ny >= -5) {
-					if(!visited[x + 5][y + 5][3]) {
-						visited[x + 5][y + 5][3] = true;
-						visited[nx + 5][ny + 5][3] = true;
-						answer++;
-
-						x = nx;
-						y = ny;
-					}
-				}
-			}
+			answer += move(dir);
 		}
 		return answer;
 	}
