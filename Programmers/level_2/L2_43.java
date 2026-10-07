@@ -5,26 +5,34 @@ public class L2_43 {
 	int solution(int[][] land) {
 		int answer = 0;
 
-		//dp
-		int[] prev = new int[land[0].length]; //이전 값
-		int[] dp = new int[land[0].length]; //현재 값 저장
+		int[] dp = land[0].clone(); //현재까지 누적 합
+		int[] next = new int[land[0].length]; //다음행까지 누적 합
 
-		//첫번째 행 저장
-		for(int i = 0; i < land[0].length; i++) {
-			prev[i] = land[0][i];
+		//누적 합을 반환
+		for (int i = 1; i < land.length; i++) {
+			for (int j = 0; j < land[0].length; j++) {
+				int max = -1;
+
+				for (int k = 0; k < land[0].length; k++) {
+					//같은 열이면 패스
+					if(j == k) continue;
+					//제일 큰 수 저장
+					else {
+						max = Math.max(max, dp[k]);
+					}
+				}
+				//최대 점수 합을 저장
+				next[j] = land[i][j] + max;  
+			}
+			//dp에 최종 정보를 담음
+			int[] tmp = dp;
+			dp = next;
+			next = tmp;
 		}
 
-		//두번째 행부터 최대값 저장
-		for(int i = 1; i < land.length; i++) {
-			for(int j = 0; j < land[0].length; j++) {
-				int max = -1;
-				for(int k = 0; k < land[0].length; k++) {
-					if(j == k) {
-						continue;
-					}
-					max = Math.max(max, prev[k]); //최댓값 저장
-				}
-			}
+		//가장 큰 수 출력
+		for(int i : dp) {
+			answer = Math.max(answer, i);
 		}
 
 		return answer;
