@@ -9,22 +9,31 @@ public class L2_44 {
 		Queue<String> q = new LinkedList<>();
 
 		//LRU 알고리즘
-		//수정필요 : cache hit일 때 queue가 새로 갱신 되어야함
+		//수정 : cache hit일 때 queue가 새로 갱신 됨
 		for(int i = 0; i < cities.length; i++) {
-			//캐시가 전부 채워진 경우
-			if(q.size() >= cacheSize) {
-				if(q.contains(cities[i])) {
-					//cache hit
-					answer++;
-				} else {
-					q.poll();
-					q.offer(cities[i]);
-					//cache miss
-					answer += 5;
-				}
-			} else {
-				q.offer(cities[i]);
+			//대소문자 구분을 하지 않음
+			String s = cities[i].toLowerCase();
+
+			//캐시 사이즈가 0인 경우 miss 
+			if(cacheSize == 0) {
+				answer += 5;
+			}
+			//q에 같은 인덱스가 있는 경우 갱신, hit
+			else if(q.contains(s)) {
+				q.remove(s);
+				q.offer(s);
 				answer++;
+			}
+			//큐가 꽉 찬 경우 miss
+			else if(q.size() >= cacheSize) {
+				q.poll();
+				q.offer(s);
+				answer += 5;
+			}
+			//꽉 차지 않은 경우 miss
+			else {
+				q.offer(s);
+				answer += 5;
 			}
 		}
 		return answer;
