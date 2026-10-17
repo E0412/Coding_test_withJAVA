@@ -11,8 +11,7 @@ public class L2_45 {
 		int minutes = 0; 
 
 		Map<String, Integer> inMap = new HashMap<>();
-		Map<String, Integer> totalMap = new HashMap<>();
-
+		Map<String, Integer> totalMap = new TreeMap<>(); //정렬 필요
 
 		//출차 기록이 없는 경우 생각
 		//시간 계산
@@ -45,10 +44,15 @@ public class L2_45 {
 		int u_charge = fees[3]; //단위요금
 
 		List<Integer> list = new ArrayList<>();
+
 		for(int time : totalMap.values()) {
-			int total = time - b_time;
 			int sum = b_charge;
-			sum += (total / u_time) * u_charge;
+			//추가 요금이 부과된 경우
+			if(time > b_time) {
+				int total = time - b_time;
+				int t_time = (total + u_time - 1) / u_time; //나누어 떨어지지 않을때만 몫을 1 올린다
+				sum +=  t_time * u_charge;
+			}
 			list.add(sum);   
 		}
 
